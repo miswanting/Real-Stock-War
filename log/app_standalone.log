@@ -1,0 +1,674 @@
+[543][INFO][HLSpider]正在获取汇率…
+[544][INFO][CodeSpider]正在获取股票代码…
+[545][INFO][DPSpider]正在获取查询大盘指数…
+[646][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[646][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[646][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[646][INFO][DPSpider]正在获取查询大盘指数…
+[655][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[655][INFO][HLSpider]正在获取汇率…
+[744][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[744][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[744][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[744][INFO][DPSpider]正在获取查询大盘指数…
+[750][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[751][INFO][HLSpider]正在获取汇率…
+[833][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[833][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[834][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[834][INFO][DPSpider]正在获取查询大盘指数…
+[844][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[844][INFO][HLSpider]正在获取汇率…
+[930][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[930][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[930][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[930][INFO][DPSpider]正在获取查询大盘指数…
+[950][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[950][INFO][HLSpider]正在获取汇率…
+[18][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[18][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[18][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[19][INFO][DPSpider]正在获取查询大盘指数…
+[40][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[40][INFO][HLSpider]正在获取汇率…
+[123][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[123][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[123][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[123][INFO][DPSpider]正在获取查询大盘指数…
+[153][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[153][INFO][HLSpider]正在获取汇率…
+[210][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[210][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[210][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[210][INFO][DPSpider]正在获取查询大盘指数…
+[241][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[241][INFO][HLSpider]正在获取汇率…
+[300][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[300][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[300][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[300][INFO][DPSpider]正在获取查询大盘指数…
+[322][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[322][INFO][HLSpider]正在获取汇率…
+[393][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[393][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[393][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[393][INFO][DPSpider]正在获取查询大盘指数…
+[416][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[416][INFO][HLSpider]正在获取汇率…
+[498][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[498][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[498][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[498][INFO][DPSpider]正在获取查询大盘指数…
+[504][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[504][INFO][HLSpider]正在获取汇率…
+[600][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[600][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[600][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[600][INFO][DPSpider]正在获取查询大盘指数…
+[607][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[607][INFO][HLSpider]正在获取汇率…
+[693][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[693][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[693][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[693][INFO][DPSpider]正在获取查询大盘指数…
+[695][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[695][INFO][HLSpider]正在获取汇率…
+[782][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[782][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[782][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[782][INFO][DPSpider]正在获取查询大盘指数…
+[798][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[798][INFO][HLSpider]正在获取汇率…
+[887][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[887][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[887][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[887][INFO][DPSpider]正在获取查询大盘指数…
+[898][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[898][INFO][HLSpider]正在获取汇率…
+[975][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[975][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[975][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[975][INFO][DPSpider]正在获取查询大盘指数…
+[988][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[988][INFO][HLSpider]正在获取汇率…
+[79][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[79][INFO][HLSpider]正在获取汇率…
+[86][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[86][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[86][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[86][INFO][DPSpider]正在获取查询大盘指数…
+[174][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[174][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[174][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[174][INFO][DPSpider]正在获取查询大盘指数…
+[196][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[196][INFO][HLSpider]正在获取汇率…
+[262][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[262][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[262][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[262][INFO][DPSpider]正在获取查询大盘指数…
+[285][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[285][INFO][HLSpider]正在获取汇率…
+[356][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[356][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[356][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[356][INFO][DPSpider]正在获取查询大盘指数…
+[391][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[392][INFO][HLSpider]正在获取汇率…
+[462][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[462][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[462][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[462][INFO][DPSpider]正在获取查询大盘指数…
+[485][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[485][INFO][HLSpider]正在获取汇率…
+[557][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[557][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[557][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[557][INFO][DPSpider]正在获取查询大盘指数…
+[577][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[577][INFO][HLSpider]正在获取汇率…
+[637][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[637][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[638][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[638][INFO][DPSpider]正在获取查询大盘指数…
+[668][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[668][INFO][HLSpider]正在获取汇率…
+[725][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[725][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[725][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[725][INFO][DPSpider]正在获取查询大盘指数…
+[761][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[761][INFO][HLSpider]正在获取汇率…
+[829][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[829][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[829][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[829][INFO][DPSpider]正在获取查询大盘指数…
+[853][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[853][INFO][HLSpider]正在获取汇率…
+[913][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[913][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[913][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[914][INFO][DPSpider]正在获取查询大盘指数…
+[941][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[941][INFO][HLSpider]正在获取汇率…
+[6][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[6][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[6][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[6][INFO][DPSpider]正在获取查询大盘指数…
+[55][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[55][INFO][HLSpider]正在获取汇率…
+[114][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[114][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[114][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[114][INFO][DPSpider]正在获取查询大盘指数…
+[159][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[159][INFO][HLSpider]正在获取汇率…
+[199][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[199][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[200][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[200][INFO][DPSpider]正在获取查询大盘指数…
+[249][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[249][INFO][HLSpider]正在获取汇率…
+[281][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[281][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[281][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[281][INFO][DPSpider]正在获取查询大盘指数…
+[343][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[343][INFO][HLSpider]正在获取汇率…
+[396][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[396][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[396][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[396][INFO][DPSpider]正在获取查询大盘指数…
+[434][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[434][INFO][HLSpider]正在获取汇率…
+[489][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[489][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[489][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[489][INFO][DPSpider]正在获取查询大盘指数…
+[525][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[525][INFO][HLSpider]正在获取汇率…
+[583][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[583][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[583][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[583][INFO][DPSpider]正在获取查询大盘指数…
+[607][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[607][INFO][HLSpider]正在获取汇率…
+[675][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[675][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[676][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[676][INFO][DPSpider]正在获取查询大盘指数…
+[701][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[701][INFO][HLSpider]正在获取汇率…
+[776][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[776][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[776][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[776][INFO][DPSpider]正在获取查询大盘指数…
+[798][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[799][INFO][HLSpider]正在获取汇率…
+[857][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[857][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[857][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[857][INFO][DPSpider]正在获取查询大盘指数…
+[900][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[900][INFO][HLSpider]正在获取汇率…
+[939][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[940][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[940][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[940][INFO][DPSpider]正在获取查询大盘指数…
+[987][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[987][INFO][HLSpider]正在获取汇率…
+[29][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[30][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[30][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[30][INFO][DPSpider]正在获取查询大盘指数…
+[97][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[97][INFO][HLSpider]正在获取汇率…
+[123][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[123][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[123][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[123][INFO][DPSpider]正在获取查询大盘指数…
+[178][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[178][INFO][HLSpider]正在获取汇率…
+[219][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[219][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[219][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[219][INFO][DPSpider]正在获取查询大盘指数…
+[280][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[280][INFO][HLSpider]正在获取汇率…
+[344][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[344][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[344][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[344][INFO][DPSpider]正在获取查询大盘指数…
+[388][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[388][INFO][HLSpider]正在获取汇率…
+[449][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[449][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[449][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[449][INFO][DPSpider]正在获取查询大盘指数…
+[509][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[509][INFO][HLSpider]正在获取汇率…
+[544][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[544][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[544][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[544][INFO][DPSpider]正在获取查询大盘指数…
+[604][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[604][INFO][HLSpider]正在获取汇率…
+[650][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[650][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[650][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[650][INFO][DPSpider]正在获取查询大盘指数…
+[697][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[697][INFO][HLSpider]正在获取汇率…
+[737][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[737][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[737][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[737][INFO][DPSpider]正在获取查询大盘指数…
+[789][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[789][INFO][HLSpider]正在获取汇率…
+[822][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[822][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[822][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[822][INFO][DPSpider]正在获取查询大盘指数…
+[877][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[877][INFO][HLSpider]正在获取汇率…
+[922][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[922][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[922][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[922][INFO][DPSpider]正在获取查询大盘指数…
+[966][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[966][INFO][HLSpider]正在获取汇率…
+[15][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[15][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[15][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[15][INFO][DPSpider]正在获取查询大盘指数…
+[57][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[57][INFO][HLSpider]正在获取汇率…
+[96][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[96][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[96][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[96][INFO][DPSpider]正在获取查询大盘指数…
+[145][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[145][INFO][HLSpider]正在获取汇率…
+[195][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[195][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[195][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[195][INFO][DPSpider]正在获取查询大盘指数…
+[229][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[229][INFO][HLSpider]正在获取汇率…
+[280][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[280][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[280][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[280][INFO][DPSpider]正在获取查询大盘指数…
+[363][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[363][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[363][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[363][INFO][DPSpider]正在获取查询大盘指数…
+[447][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[447][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[448][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[448][INFO][DPSpider]正在获取查询大盘指数…
+[544][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[544][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[544][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[544][INFO][DPSpider]正在获取查询大盘指数…
+[641][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[641][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[641][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[641][INFO][DPSpider]正在获取查询大盘指数…
+[731][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[731][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[731][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[731][INFO][DPSpider]正在获取查询大盘指数…
+[828][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[828][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[828][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[828][INFO][DPSpider]正在获取查询大盘指数…
+[917][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[917][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[917][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[917][INFO][DPSpider]正在获取查询大盘指数…
+[7][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[7][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[7][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[7][INFO][DPSpider]正在获取查询大盘指数…
+[93][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[93][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[93][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[93][INFO][DPSpider]正在获取查询大盘指数…
+[200][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[200][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[200][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[200][INFO][DPSpider]正在获取查询大盘指数…
+[282][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[282][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[283][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[283][INFO][DPSpider]正在获取查询大盘指数…
+[399][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[399][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[399][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[399][INFO][DPSpider]正在获取查询大盘指数…
+[483][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[484][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[484][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[484][INFO][DPSpider]正在获取查询大盘指数…
+[835][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[836][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[836][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[836][INFO][DPSpider]正在获取查询大盘指数…
+[932][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[932][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[932][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[933][INFO][DPSpider]正在获取查询大盘指数…
+[21][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[22][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[22][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[22][INFO][DPSpider]正在获取查询大盘指数…
+[114][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[114][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[114][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[114][INFO][DPSpider]正在获取查询大盘指数…
+[208][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[208][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[208][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[208][INFO][DPSpider]正在获取查询大盘指数…
+[299][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[299][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[299][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[299][INFO][DPSpider]正在获取查询大盘指数…
+[390][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[390][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[390][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[390][INFO][DPSpider]正在获取查询大盘指数…
+[479][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[480][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[480][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[480][INFO][DPSpider]正在获取查询大盘指数…
+[568][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[568][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[568][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[568][INFO][DPSpider]正在获取查询大盘指数…
+[533][ERROR][CodeSpider][Errno 2] No such file or directory: 'tmp/shList.csv'
+[533][INFO][CodeSpider]正在获取股票代码…
+[614][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[614][INFO][HLSpider]正在获取汇率…
+[699][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[699][INFO][HLSpider]正在获取汇率…
+[787][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[787][INFO][HLSpider]正在获取汇率…
+[877][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[877][INFO][HLSpider]正在获取汇率…
+[972][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[972][INFO][HLSpider]正在获取汇率…
+[55][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[55][INFO][HLSpider]正在获取汇率…
+[146][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[146][INFO][HLSpider]正在获取汇率…
+[235][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[235][INFO][HLSpider]正在获取汇率…
+[320][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[320][INFO][HLSpider]正在获取汇率…
+[421][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[421][INFO][HLSpider]正在获取汇率…
+[536][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[536][INFO][HLSpider]正在获取汇率…
+[629][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[629][INFO][HLSpider]正在获取汇率…
+[715][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[715][INFO][HLSpider]正在获取汇率…
+[808][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[808][INFO][HLSpider]正在获取汇率…
+[898][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[898][INFO][HLSpider]正在获取汇率…
+[995][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[995][INFO][HLSpider]正在获取汇率…
+[96][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[96][INFO][HLSpider]正在获取汇率…
+[180][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[180][INFO][HLSpider]正在获取汇率…
+[274][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[274][INFO][HLSpider]正在获取汇率…
+[359][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[359][INFO][HLSpider]正在获取汇率…
+[447][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[447][INFO][HLSpider]正在获取汇率…
+[542][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[542][INFO][HLSpider]正在获取汇率…
+[644][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[644][INFO][HLSpider]正在获取汇率…
+[663][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[663][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[663][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[663][INFO][DPSpider]正在获取查询大盘指数…
+[738][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[738][INFO][HLSpider]正在获取汇率…
+[757][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[757][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[757][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[757][INFO][DPSpider]正在获取查询大盘指数…
+[844][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[845][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[845][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[845][INFO][DPSpider]正在获取查询大盘指数…
+[938][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[938][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[938][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[938][INFO][DPSpider]正在获取查询大盘指数…
+[28][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[28][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[28][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[28][INFO][DPSpider]正在获取查询大盘指数…
+[57][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[57][INFO][HLSpider]正在获取汇率…
+[129][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[129][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[129][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[129][INFO][DPSpider]正在获取查询大盘指数…
+[223][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[223][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[223][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[223][INFO][DPSpider]正在获取查询大盘指数…
+[316][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[316][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[316][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[316][INFO][DPSpider]正在获取查询大盘指数…
+[417][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[417][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[417][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[417][INFO][DPSpider]正在获取查询大盘指数…
+[506][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[506][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[506][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[506][INFO][DPSpider]正在获取查询大盘指数…
+[597][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[597][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[597][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[597][INFO][DPSpider]正在获取查询大盘指数…
+[685][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[685][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[685][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[685][INFO][DPSpider]正在获取查询大盘指数…
+[783][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[783][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[783][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[783][INFO][DPSpider]正在获取查询大盘指数…
+[868][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[868][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[868][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[868][INFO][DPSpider]正在获取查询大盘指数…
+[956][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[957][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[957][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[957][INFO][DPSpider]正在获取查询大盘指数…
+[59][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[59][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[59][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[59][INFO][DPSpider]正在获取查询大盘指数…
+[149][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[149][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[149][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[149][INFO][DPSpider]正在获取查询大盘指数…
+[243][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[243][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[243][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[243][INFO][DPSpider]正在获取查询大盘指数…
+[584][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[584][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[584][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[585][INFO][DPSpider]正在获取查询大盘指数…
+[671][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[671][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[672][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[672][INFO][DPSpider]正在获取查询大盘指数…
+[758][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[758][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[758][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[758][INFO][DPSpider]正在获取查询大盘指数…
+[874][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[879][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[890][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[896][INFO][DPSpider]正在获取查询大盘指数…
+[896][ERROR][CodeSpider][Errno 2] No such file or directory: 'tmp/shList.csv'
+[897][INFO][CodeSpider]正在获取股票代码…
+[991][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[991][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[991][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[991][INFO][DPSpider]正在获取查询大盘指数…
+[79][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[79][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[79][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[79][INFO][DPSpider]正在获取查询大盘指数…
+[183][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[183][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[183][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[183][INFO][DPSpider]正在获取查询大盘指数…
+[295][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[295][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[295][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[295][INFO][DPSpider]正在获取查询大盘指数…
+[383][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[383][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[383][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[383][INFO][DPSpider]正在获取查询大盘指数…
+[488][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[488][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[488][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[488][INFO][DPSpider]正在获取查询大盘指数…
+[593][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[593][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[593][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[594][INFO][DPSpider]正在获取查询大盘指数…
+[679][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[679][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[679][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[679][INFO][DPSpider]正在获取查询大盘指数…
+[772][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[772][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[772][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[773][INFO][DPSpider]正在获取查询大盘指数…
+[863][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[863][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[863][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[864][INFO][DPSpider]正在获取查询大盘指数…
+[954][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[955][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[955][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[955][INFO][DPSpider]正在获取查询大盘指数…
+[48][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[48][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[48][ERROR][DPSpider][Errno 2] No such file or directory: 'tmp/dpStatus.csv'
+[48][INFO][DPSpider]正在获取查询大盘指数…
+[156][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[156][INFO][HLSpider]正在获取汇率…
+[254][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[254][INFO][HLSpider]正在获取汇率…
+[333][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[333][INFO][HLSpider]正在获取汇率…
+[432][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[432][INFO][HLSpider]正在获取汇率…
+[524][ERROR][HLSpider][Errno 2] No such file or directory: 'tmp/huilv.csv'
+[524][INFO][HLSpider]正在获取汇率…
+[244][INFO][SHSpider]正在获取上海股票行情…
+[244][INFO][SZSpider]正在获取深圳股票行情…
+[321][DEBUG][SZSpider]已获取深圳"平安银行"的股票行情。(0/2446)
+[404][DEBUG][SZSpider]已获取深圳"万 科Ａ"的股票行情。(1/2446)
+[444][DEBUG][SHSpider]已获取上海"R003"的股票行情。(1/1415)
+[540][DEBUG][SHSpider]已获取上海"R007"的股票行情。(2/1415)
+[576][DEBUG][SZSpider]已获取深圳"国农科技"的股票行情。(3/2446)
+[625][INFO][HLSpider]汇率获取完毕。
+[657][DEBUG][SHSpider]已获取上海"R014"的股票行情。(3/1415)
+[671][DEBUG][SZSpider]已获取深圳"世纪星源"的股票行情。(4/2446)
+[757][DEBUG][SHSpider]已获取上海"R028"的股票行情。(4/1415)
+[774][DEBUG][SZSpider]已获取深圳"深振业Ａ"的股票行情。(5/2446)
+[854][DEBUG][SHSpider]已获取上海"R091"的股票行情。(5/1415)
+[878][DEBUG][SZSpider]已获取深圳"全新好"的股票行情。(6/2446)
+[951][DEBUG][SHSpider]已获取上海"R182"的股票行情。(6/1415)
+[50][DEBUG][SHSpider]已获取上海"R001"的股票行情。(7/1415)
+[144][DEBUG][SHSpider]已获取上海"R002"的股票行情。(8/1415)
+[263][DEBUG][SHSpider]已获取上海"R004"的股票行情。(9/1415)
+[376][DEBUG][SHSpider]已获取上海"RC001"的股票行情。(10/1415)
+[494][DEBUG][SHSpider]已获取上海"RC003"的股票行情。(11/1415)
+[595][DEBUG][SHSpider]已获取上海"RC007"的股票行情。(12/1415)
+[113][ERROR][DPSpider]timed out
+[113][INFO][DPSpider]正在获取查询大盘指数…
+[223][DEBUG][SHSpider]已获取上海"0504R007"的股票行情。(16/1415)
+[224][DEBUG][DPSpider]已获取大盘指数"上证指数"的信息。(0/3)
+[224][DEBUG][DPSpider]已获取大盘指数"深证成指"的信息。(1/3)
+[224][INFO][DPSpider]大盘指数获取完毕。
+[314][DEBUG][SHSpider]已获取上海"0504R028"的股票行情。(17/1415)
+[425][DEBUG][SHSpider]已获取上海"0504R091"的股票行情。(18/1415)
+[30][DEBUG][SZSpider]已获取深圳"神州高铁"的股票行情。(7/2446)
+[119][DEBUG][SZSpider]已获取深圳"中国宝安"的股票行情。(8/2446)
+[214][DEBUG][SZSpider]已获取深圳"美丽生态"的股票行情。(9/2446)
+[426][DEBUG][SZSpider]已获取深圳"深物业A"的股票行情。(10/2446)
+[540][DEBUG][SZSpider]已获取深圳"南 玻Ａ"的股票行情。(11/2446)
+[874][DEBUG][SZSpider]已获取深圳"沙河股份"的股票行情。(13/2446)
+[131][DEBUG][SHSpider]已获取上海"0512R007"的股票行情。(25/1415)
+[238][DEBUG][SHSpider]已获取上海"0512R028"的股票行情。(26/1415)
+[333][DEBUG][SHSpider]已获取上海"0512R091"的股票行情。(27/1415)
+[78][DEBUG][SZSpider]已获取深圳"深康佳Ａ"的股票行情。(15/2446)
+[192][DEBUG][SZSpider]已获取深圳"深中华A"的股票行情。(16/2446)
+[295][DEBUG][SZSpider]已获取深圳"神州长城"的股票行情。(17/2446)
+[393][DEBUG][SZSpider]已获取深圳"深深宝Ａ"的股票行情。(18/2446)
+[500][DEBUG][SHSpider]已获取上海"GC001"的股票行情。(37/1415)
+[614][DEBUG][SHSpider]已获取上海"GC002"的股票行情。(38/1415)
+[903][DEBUG][SHSpider]已获取上海"GC003"的股票行情。(39/1415)
+[999][DEBUG][SHSpider]已获取上海"GC004"的股票行情。(40/1415)
+[89][DEBUG][SHSpider]已获取上海"GC007"的股票行情。(41/1415)
+[177][DEBUG][SHSpider]已获取上海"GC014"的股票行情。(42/1415)
+[491][DEBUG][SZSpider]已获取深圳"深华发Ａ"的股票行情。(19/2446)
+[581][DEBUG][SZSpider]已获取深圳"深科技"的股票行情。(20/2446)
+[653][DEBUG][SHSpider]已获取上海"GC028"的股票行情。(43/1415)
+[688][DEBUG][SZSpider]已获取深圳"深赤湾Ａ"的股票行情。(21/2446)
+[744][DEBUG][SHSpider]已获取上海"GC091"的股票行情。(44/1415)
+[787][DEBUG][SZSpider]已获取深圳"深天地Ａ"的股票行情。(22/2446)
+[838][DEBUG][SHSpider]已获取上海"GC182"的股票行情。(45/1415)
+[977][DEBUG][SZSpider]已获取深圳"特 力Ａ"的股票行情。(24/2446)
+[70][DEBUG][SZSpider]已获取深圳"飞亚达Ａ"的股票行情。(25/2446)
+[171][DEBUG][SZSpider]已获取深圳"深圳能源"的股票行情。(26/2446)
+[265][DEBUG][SZSpider]已获取深圳"国药一致"的股票行情。(27/2446)
+[375][DEBUG][SZSpider]已获取深圳"深深房Ａ"的股票行情。(28/2446)
+[473][DEBUG][SZSpider]已获取深圳"富奥股份"的股票行情。(29/2446)
+[584][DEBUG][SZSpider]已获取深圳"中粮地产"的股票行情。(30/2446)
+[680][DEBUG][SZSpider]已获取深圳"深桑达Ａ"的股票行情。(31/2446)
+[892][DEBUG][SZSpider]已获取深圳"神州数码"的股票行情。(33/2446)
+[977][DEBUG][SZSpider]已获取深圳"中国天楹"的股票行情。(34/2446)
+[67][DEBUG][SHSpider]已获取上海"基金通乾"的股票行情。(58/1415)
+[68][DEBUG][SZSpider]已获取深圳"华联控股"的股票行情。(35/2446)
+[161][DEBUG][SHSpider]已获取上海"基金科瑞"的股票行情。(59/1415)
+[177][DEBUG][SZSpider]已获取深圳"*ST南电A"的股票行情。(36/2446)
+[252][DEBUG][SHSpider]已获取上海"基金银丰"的股票行情。(60/1415)
+[273][DEBUG][SZSpider]已获取深圳"深大通"的股票行情。(37/2446)
+[339][DEBUG][SHSpider]已获取上海"国金鑫新"的股票行情。(61/1415)
+[356][DEBUG][SZSpider]已获取深圳"中集集团"的股票行情。(38/2446)
+[436][DEBUG][SHSpider]已获取上海"财通精选"的股票行情。(62/1415)
+[447][DEBUG][SZSpider]已获取深圳"宝安地产"的股票行情。(39/2446)
+[534][DEBUG][SHSpider]已获取上海"能源互联"的股票行情。(63/1415)
+[546][DEBUG][SZSpider]已获取深圳"中洲控股"的股票行情。(40/2446)
+[619][DEBUG][SHSpider]已获取上海"精准医疗"的股票行情。(64/1415)
+[640][DEBUG][SZSpider]已获取深圳"中航地产"的股票行情。(41/2446)
+[724][DEBUG][SHSpider]已获取上海"财通升级"的股票行情。(65/1415)
+[86][DEBUG][SHSpider]已获取上海"500等权"的股票行情。(66/1415)
+[174][DEBUG][SHSpider]已获取上海"500等权A"的股票行情。(67/1415)
+[268][DEBUG][SHSpider]已获取上海"500等权B"的股票行情。(68/1415)
+[354][DEBUG][SHSpider]已获取上海"军工分级"的股票行情。(69/1415)
+[460][DEBUG][SHSpider]已获取上海"军工A"的股票行情。(70/1415)

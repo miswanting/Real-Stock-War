@@ -215,14 +215,8 @@ class app(object):
                     passEntry.bind('<Button-1>', passEntryReady)
 
                 def login():
-                    print(userName.get(), password.get())
-                    userEntry.place_forget()
-                    passEntry.place_forget()
-                    loginB.place_forget()
-                    regisB.place_forget()
                     saveFileList = os.walk('save')
                     isExist = False
-                    print(saveFileList)
                     for rootPath, dirs, files in saveFileList:
                         for each in files:
                             if each == userName.get():
@@ -231,11 +225,15 @@ class app(object):
                         userFile = configparser.ConfigParser()
                         userFile.read('save/' + userName.get())
                         if userFile['Account']['pw'] == password.get():
-                            print('111')
+                            userEntry.place_forget()
+                            passEntry.place_forget()
+                            loginB.place_forget()
+                            regisB.place_forget()
+                            createMenu()
+                        else:
+                            print('密码错误！')
                     else:
                         print('用户不存在！')
-
-                    createMenu()
 
                 def regis():
                     def repeEntryReady(e):
@@ -263,13 +261,19 @@ class app(object):
                                 userFile['Account'] = {
                                 'pw' : password.get(),
                                 'group' : 'player',
-                                'total_assets' : '100000'
+                                'total_assets' : ''
                                 }
                                 with open('save/' + userName.get(), 'w') as configFile:
                                     userFile.write(configFile)
+                                    repeEntry.place_forget()
+                                    userEntry.place(relx=0.5, rely=0.4, anchor=tk.CENTER)
+                                    passEntry.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
+                                    loginB.place(relx=0.45, rely=0.6, anchor=tk.CENTER)
+                                    regisB.place(relx=0.55, rely=0.6, anchor=tk.CENTER)
                         else:
-                            pass
-                    print(userName.get(), password.get(), repeat.get())
+                            print('两次输入密码不一致，请重新输入')
+                            password.set('')
+                            repeat.set('')
                     # createLoginPage()
 
                 def createMenu():
@@ -279,13 +283,15 @@ class app(object):
                     gameMenu.add_command(label="开始新游戏", command=say_hi)
                     gameMenu.add_command(label="继续游戏", command=say_hi)
                     gameMenu.add_separator()
-                    gameMenu.add_command(label="游戏设置", command=say_hi)
+                    gameMenu.add_command(label="注销账号", command=say_hi)
                     gameMenu.add_separator()
                     gameMenu.add_command(label="退出游戏", command=exit)
                     menuBar.add_cascade(label="游戏", menu=gameMenu)
 
                     editMenu = tk.Menu(menuBar, tearoff=0)
                     editMenu.add_command(label="刷新", command=say_hi)
+                    editMenu.add_separator()
+                    editMenu.add_command(label="游戏设置", command=say_hi)
                     menuBar.add_cascade(label="编辑", menu=editMenu)
 
                     viewMenu = tk.Menu(menuBar, tearoff=0)
