@@ -1,6 +1,6 @@
 # coding=utf-8
 
-import re, urllib, threading, configparser, logging, http.cookiejar, csv, bs4, tkinter as tk, time, os
+import re, urllib, threading, configparser, logging, http.cookiejar, csv, bs4, tkinter as tk, time, os, hashlib
 
 class app(object):
     """docstring for app"""
@@ -9,6 +9,8 @@ class app(object):
 
     shProgress = '未开始'
     szProgress = '未开始'
+
+    spacialChar = '↑↓←→↖↙↗↘↕'
 
     def __init__(self):
         super(app, self).__init__()
@@ -206,11 +208,15 @@ class app(object):
                     userName.set('请输入用户名')
                     password.set('请输入密码')
                     repeat.set('请再次输入密码')
-                    repeEntry.place_forget()
-                    userEntry.place(relx=0.5, rely=0.4, anchor=tk.CENTER)
-                    passEntry.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
-                    loginB.place(relx=0.45, rely=0.6, anchor=tk.CENTER)
-                    regisB.place(relx=0.55, rely=0.6, anchor=tk.CENTER)
+                    repeEntry.grid_forget()
+                    userEntry.grid(row=0, column=0, columnspan=2)
+                    passEntry.grid(row=1, column=0, columnspan=2)
+                    loginB.grid(row=2, column=0)
+                    regisB.grid(row=2, column=1)
+                    # userEntry.place(relx=0.5, rely=0.4, anchor=tk.CENTER)
+                    # passEntry.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
+                    # loginB.place(relx=0.45, rely=0.6, anchor=tk.CENTER)
+                    # regisB.place(relx=0.55, rely=0.6, anchor=tk.CENTER)
                     userEntry.bind('<Button-1>', userEntryReady)
                     passEntry.bind('<Button-1>', passEntryReady)
 
@@ -222,14 +228,14 @@ class app(object):
                             if each == userName.get():
                                 isExist = True
                     if isExist:
-                        userFile = configparser.ConfigParser()
-                        userFile.read('save/' + userName.get())
-                        if userFile['Account']['pw'] == password.get():
-                            userEntry.place_forget()
-                            passEntry.place_forget()
-                            loginB.place_forget()
-                            regisB.place_forget()
-                            createMenu()
+                        self.userFile = configparser.ConfigParser()
+                        self.userFile.read('save/' + userName.get())
+                        if self.userFile['Account']['pw'] == hashlib.md5(str.encode(password.get())).hexdigest():
+                            userEntry.grid_forget()
+                            passEntry.grid_forget()
+                            loginB.grid_forget()
+                            regisB.grid_forget()
+                            createWelcomeMenu()
                         else:
                             print('密码错误！')
                     else:
@@ -240,9 +246,11 @@ class app(object):
                         repeat.set('')
                         repeEntry.config(show='*')
 
-                    loginB.place_forget()
-                    repeEntry.place(relx=0.5, rely=0.6, anchor=tk.CENTER)
-                    regisB.place(relx=0.5, rely=0.7, anchor=tk.CENTER)
+                    loginB.grid_forget()
+                    repeEntry.grid(row=3, column=0)
+                    regisB.grid(row=4, column=0)
+                    # repeEntry.place(relx=0.5, rely=0.6, anchor=tk.CENTER)
+                    # regisB.place(relx=0.5, rely=0.7, anchor=tk.CENTER)
 
                     if repeat.get() == '请再次输入密码':
                         repeEntry.bind('<Button-1>', repeEntryReady)
@@ -257,19 +265,23 @@ class app(object):
                             if isExist:
                                 print('用户已存在！')
                             else:
-                                userFile = configparser.ConfigParser()
-                                userFile['Account'] = {
-                                'pw' : password.get(),
+                                self.userFile = configparser.ConfigParser()
+                                self.userFile['Account'] = {
+                                'pw' : hashlib.md5(str.encode(password.get())).hexdigest(),
                                 'group' : 'player',
-                                'total_assets' : ''
+                                'total_assets' : 0
                                 }
                                 with open('save/' + userName.get(), 'w') as configFile:
-                                    userFile.write(configFile)
-                                    repeEntry.place_forget()
-                                    userEntry.place(relx=0.5, rely=0.4, anchor=tk.CENTER)
-                                    passEntry.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
-                                    loginB.place(relx=0.45, rely=0.6, anchor=tk.CENTER)
-                                    regisB.place(relx=0.55, rely=0.6, anchor=tk.CENTER)
+                                    self.userFile.write(configFile)
+                                    repeEntry.grid_forget()
+                                    userEntry.grid(row=0, column=0, columnspan=2)
+                                    passEntry.grid(row=1, column=0, columnspan=2)
+                                    loginB.grid(row=2, column=0)
+                                    regisB.grid(row=2, column=1)
+                                    # userEntry.place(relx=0.5, rely=0.4, anchor=tk.CENTER)
+                                    # passEntry.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
+                                    # loginB.place(relx=0.45, rely=0.6, anchor=tk.CENTER)
+                                    # regisB.place(relx=0.55, rely=0.6, anchor=tk.CENTER)
                         else:
                             print('两次输入密码不一致，请重新输入')
                             password.set('')
@@ -280,8 +292,7 @@ class app(object):
                     menuBar = tk.Menu(root)
 
                     gameMenu = tk.Menu(menuBar, tearoff=0)
-                    gameMenu.add_command(label="开始新游戏", command=say_hi)
-                    gameMenu.add_command(label="继续游戏", command=say_hi)
+                    gameMenu.add_command(label="开始新游戏", command=newGame)
                     gameMenu.add_separator()
                     gameMenu.add_command(label="注销账号", command=say_hi)
                     gameMenu.add_separator()
@@ -315,6 +326,38 @@ class app(object):
 
                     root.config(menu=menuBar)
 
+                def newGame():
+                    def yes():
+                        self.userFile['Account']['total_assets'] = '10000000'
+                        ask.destroy()
+                        showWelcomeMessage()
+                    ask = tk.Toplevel()
+                    ask.title('开始新游戏')
+                    ask.protocol('WM_DELETE_WINDOW', ask.destroy)
+                    msg = tk.Message(ask, text='你确定要进行新游戏吗？\n这样会覆盖存档', justify=tk.CENTER, width=400)
+                    yB = tk.Button(ask, text='是', command=yes)
+                    nB= tk.Button(ask, text='否', command=ask.destroy)
+                    msg.grid(row=0, column=0, columnspan=2)
+                    yB.grid(row=1, column=0)
+                    nB.grid(row=1, column=1)
+
+                def showWelcomeMessage():
+                    userNameLL.config(text='账户名：')
+                    userNameL.config(text=userName.get())
+                    total_assetsL.config(text=self.userFile['Account']['total_assets'])
+                    total_assetsL.pack()
+                    userNameLL.grid(row=0, column=0)
+                    userNameL.grid(row=0, column=1)
+                    group.grid(row=0, column=2, columnspan=2)
+                    stockB.grid(row=3, column=0)
+                    fundB.grid(row=3, column=1)
+                    futuresB.grid(row=3, column=2)
+                    foreign_currencyB.grid(row=3, column=3)
+
+                def createWelcomeMenu():
+                    createMenu()
+                    showWelcomeMessage()
+
                 def updateLoadingStatus():
                     root.title('散户王章涵:上海[%s]，深圳[%s]' % (self.shProgress, self.szProgress))
                     if running:
@@ -329,7 +372,7 @@ class app(object):
                 root = tk.Tk()
                 root.protocol('WM_DELETE_WINDOW', exit)
                 root.title('散户王章涵')
-                root.geometry('600x400')
+                # root.geometry('600x400')
                 root.resizable(0,0)
                 userName = tk.StringVar()
                 password = tk.StringVar()
@@ -339,9 +382,15 @@ class app(object):
                 repeEntry = tk.Entry(root, textvariable=repeat, justify=tk.CENTER)
                 loginB = tk.Button(root, text='登录', command=login)
                 regisB = tk.Button(root, text='注册', command=regis)
-                # gui = GUI(master=root)
+                userNameLL = tk.Label(root)
+                userNameL = tk.Label(root)
+                group = tk.LabelFrame(root, text="总资产")
+                total_assetsL = tk.Label(group)
+                stockB = tk.Button(root, text='股票', command=say_hi, state=tk.DISABLED)
+                fundB = tk.Button(root, text='基金', command=say_hi, state=tk.DISABLED)
+                futuresB = tk.Button(root, text='期货', command=say_hi, state=tk.DISABLED)
+                foreign_currencyB = tk.Button(root, text='外汇', command=say_hi)
                 createLoginPage()
-                # createMenu()
                 updateLoadingStatus()
                 root.mainloop()
             GUISpider = threading.Thread(target=showGUI, name='GUI')
