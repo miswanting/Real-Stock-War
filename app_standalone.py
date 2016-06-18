@@ -40,18 +40,27 @@ class app(object):
             while redo:
                 try:
                     logging.info('正在获取汇率…')
-                    huilvURL = self.urls['urls']['美元人民币汇率']
+                    huilvURL = self.urls['urls']['直盘汇率']
                     # 构建请求
                     request = urllib.request.Request(huilvURL)
                     # 获取响应
                     response = self.opener.open(request, timeout=self.timeout)
                     # 解码
                     huilv = response.read().decode('gbk')
-                    pattern = re.compile('"(.*?),(.*?),(.*?),(.*?),(.*?),(.*?),(.*?),(.*?),(.*?),(.*?),(.*?)"')
-                    huilvInfo = re.findall(pattern, str(huilv))
+                    rawlist = huilv.split('\n')
+                    infoList = []
+                    for line in rawlist:
+                        if line != '':
+                            infoList.append(line.split('"')[1])
+                    huilvInfo = []
+                    for each in infoList:
+                        huilvInfo.append(each.split(','))
+                    # pattern = re.compile('"(.*?),(.*?),(.*?),(.*?),(.*?),(.*?),(.*?),(.*?),(.*?),(.*?),(.*?)"')
+                    # huilvInfo = re.findall(pattern, str(huilv))
                     with open('tmp/huilv.csv', 'w') as csvFile:
                         writer = csv.writer(csvFile)
-                        writer.writerow(huilvInfo[0])
+                        for each in huilvInfo:
+                            writer.writerow(each)
                     redo = False
                     logging.info('汇率获取完毕。')
                 except Exception as e:
@@ -364,10 +373,27 @@ class app(object):
                         root.after(1000, updateLoadingStatus)
 
                 def exit():
+                    if userName.get() != '请输入用户名':
+                        with open('save/' + userName.get(), 'w') as configFile:
+                            self.userFile.write(configFile)
                     running = False
                     root.withdraw()
                     time.sleep(2)
                     root.destroy()
+                def showForeign_currencyMainPage():
+                    foreign_currencyMainPage = tk.Toplevel()
+                    foreign_currencyInfo = tk.LabelFrame(foreign_currencyMainPage, text="汇率现状")
+                    foreign_currencyInfoL = tk.Listbox(foreign_currencyInfo)
+                    foreign_currencyInfoL.insert(tk.END, "a list entry")
+                    yourCurrencyInfo = tk.LabelFrame(foreign_currencyMainPage, text="所持货币")
+                    yourCurrencyInfoL = tk.Listbox(yourCurrencyInfo)
+                    yourCurrencyInfoL.insert(tk.END, "a list entry")
+                    exchangeB = tk.Button(foreign_currencyMainPage, text='兑换')
+                    foreign_currencyInfoL.pack()
+                    yourCurrencyInfoL.pack()
+                    foreign_currencyInfo.grid(row=0, column=0)
+                    yourCurrencyInfo.grid(row=0, column=1)
+                    exchangeB.grid(row=1, column=0, rowspan=2)
 
                 root = tk.Tk()
                 root.protocol('WM_DELETE_WINDOW', exit)
@@ -389,7 +415,7 @@ class app(object):
                 stockB = tk.Button(root, text='股票', command=say_hi, state=tk.DISABLED)
                 fundB = tk.Button(root, text='基金', command=say_hi, state=tk.DISABLED)
                 futuresB = tk.Button(root, text='期货', command=say_hi, state=tk.DISABLED)
-                foreign_currencyB = tk.Button(root, text='外汇', command=say_hi)
+                foreign_currencyB = tk.Button(root, text='外汇', command=showForeign_currencyMainPage)
                 createLoginPage()
                 updateLoadingStatus()
                 root.mainloop()
