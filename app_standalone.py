@@ -5,6 +5,8 @@ import re, urllib, threading, configparser, logging, http.cookiejar, csv, bs4, t
 class app(object):
     """docstring for app"""
 
+    isRunning = True
+
     timeout = 10
 
     shProgress = '未开始'
@@ -31,6 +33,11 @@ class app(object):
         # self.analyzeData()
         # self.show()
         # self.loop()
+
+    def exit(self):
+        self.isRunning = False
+        logging.debug('程序退出请求已发出！')
+
     def doClean(self):
         for file in glob.glob('tmp/*'):
             os.remove(file)
@@ -43,6 +50,8 @@ class app(object):
             redo = True
             while redo:
                 try:
+                    if not self.isRunning:
+                        break
                     logging.info('正在获取汇率…')
                     huilvURL = self.urls['urls']['直盘汇率']
                     # 构建请求
@@ -67,15 +76,18 @@ class app(object):
                             writer.writerow(each)
                     redo = False
                     logging.info('汇率获取完毕。')
-                    if os.path.isfile('storage/huilv.csv'):
-                        os.remove('storage/huilv.csv')
-                    os.rename('tmp/huilv.csv', 'storage/huilv.csv')
+                    if self.isRunning:
+                        if os.path.isfile('storage/huilv.csv'):
+                            os.remove('storage/huilv.csv')
+                        os.rename('tmp/huilv.csv', 'storage/huilv.csv')
                 except Exception as e:
                     logging.error(str(e))
         def getGPCode():
             redo = True
             while redo:
                 try:
+                    if not self.isRunning:
+                        break
                     logging.info('正在获取股票代码…')
                     stockListURL = self.urls['urls']['股票代码']
                     # 构建请求
@@ -97,18 +109,21 @@ class app(object):
                         for i in self.szInfo:
                             writer.writerow(i)
                     redo = False
-                    if os.path.isfile('storage/shList.csv'):
-                        os.remove('storage/shList.csv')
-                    os.rename('tmp/shList.csv', 'storage/shList.csv')
-                    if os.path.isfile('storage/szList.csv'):
-                        os.remove('storage/szList.csv')
-                    os.rename('tmp/szList.csv', 'storage/szList.csv')
+                    if self.isRunning:
+                        if os.path.isfile('storage/shList.csv'):
+                            os.remove('storage/shList.csv')
+                        os.rename('tmp/shList.csv', 'storage/shList.csv')
+                        if os.path.isfile('storage/szList.csv'):
+                            os.remove('storage/szList.csv')
+                        os.rename('tmp/szList.csv', 'storage/szList.csv')
                 except Exception as e:
                     logging.error(str(e))
         def getDPStatus():
             redo = True
             while redo:
                 try:
+                    if not self.isRunning:
+                        break
                     logging.info('正在获取查询大盘指数…')
                     self.DPStatusURL = self.urls['urls']['大盘指数查询']
                     # 构建请求
@@ -133,19 +148,24 @@ class app(object):
                             writer.writerow(i)
                     redo = False
                     logging.info('大盘指数获取完毕。')
-                    if os.path.isfile('storage/dpStatus.csv'):
-                        os.remove('storage/dpStatus.csv')
-                    os.rename('tmp/dpStatus.csv', 'storage/dpStatus.csv')
+                    if self.isRunning:
+                        if os.path.isfile('storage/dpStatus.csv'):
+                            os.remove('storage/dpStatus.csv')
+                        os.rename('tmp/dpStatus.csv', 'storage/dpStatus.csv')
                 except Exception as e:
                     logging.error(str(e))
         def getSHStatus():
             redo = True
             while redo:
                 try:
+                    if not self.isRunning:
+                        break
                     logging.info('正在获取上海股票行情…')
                     self.statusURL = self.urls['urls']['行情查询']
                     self.shList = []
                     for i, v in enumerate(self.shInfo):
+                        if not self.isRunning:
+                            break
                         # 构建请求
                         request = urllib.request.Request(self.statusURL + 'sh' + v[1])
                         # 获取响应
@@ -167,9 +187,10 @@ class app(object):
                     redo = False
                     self.shProgress = '刷新完成'
                     logging.info('上海股票行情获取完毕。')
-                    if os.path.isfile('storage/shStatus.csv'):
-                        os.remove('storage/shStatus.csv')
-                    os.rename('tmp/shStatus.csv', 'storage/shStatus.csv')
+                    if self.isRunning:
+                        if os.path.isfile('storage/shStatus.csv'):
+                            os.remove('storage/shStatus.csv')
+                        os.rename('tmp/shStatus.csv', 'storage/shStatus.csv')
                 except Exception as e:
                     self.szProgress = '出现问题，等待重试'
                     logging.error(str(e))
@@ -177,9 +198,13 @@ class app(object):
             redo = True
             while redo:
                 try:
+                    if not self.isRunning:
+                        break
                     logging.info('正在获取深圳股票行情…')
                     self.szList = []
                     for i, v in enumerate(self.szInfo):
+                        if not self.isRunning:
+                            break
                         # 构建请求
                         request = urllib.request.Request(self.statusURL + 'sz' + v[1])
                         # 获取响应
@@ -201,32 +226,28 @@ class app(object):
                     redo = False
                     self.szProgress = '刷新完成'
                     logging.info('深圳股票行情获取完毕。')
-                    if os.path.isfile('storage/szStatus.csv'):
-                        os.remove('storage/szStatus.csv')
-                    os.rename('tmp/szStatus.csv', 'storage/szStatus.csv')
+                    if self.isRunning:
+                        if os.path.isfile('storage/szStatus.csv'):
+                            os.remove('storage/szStatus.csv')
+                        os.rename('tmp/szStatus.csv', 'storage/szStatus.csv')
                 except Exception as e:
                     self.szProgress = '出现问题，等待重试'
                     logging.error(str(e))
-        HLSpider = threading.Thread(target=getHL, name='HLSpider', daemon=True)
-        HLSpider.start()
-        CodeSpider = threading.Thread(target=getGPCode, name='CodeSpider', daemon=True)
-        CodeSpider.start()
-        DPSpider = threading.Thread(target=getDPStatus, name='DPSpider', daemon=True)
-        DPSpider.start()
-        CodeSpider.join()
-        SHSpider = threading.Thread(target=getSHStatus, name='SHSpider', daemon=True)
-        SHSpider.start()
-        SZSpider = threading.Thread(target=getSZStatus, name='SZSpider', daemon=True)
-        SZSpider.start()
-        # HLSpider.join()
-        # DPSpider.join()
-        # SHSpider.join()
-        # SZSpider.join()
+        self.HLSpider = threading.Thread(target=getHL, name='HLSpider', daemon=True)
+        self.HLSpider.start()
+        self.CodeSpider = threading.Thread(target=getGPCode, name='CodeSpider', daemon=True)
+        self.CodeSpider.start()
+        self.DPSpider = threading.Thread(target=getDPStatus, name='DPSpider', daemon=True)
+        self.DPSpider.start()
+        self.CodeSpider.join()
+        self.SHSpider = threading.Thread(target=getSHStatus, name='SHSpider', daemon=True)
+        self.SHSpider.start()
+        self.SZSpider = threading.Thread(target=getSZStatus, name='SZSpider', daemon=True)
+        self.SZSpider.start()
 
     def show(self):
         try:
             def showGUI():
-                running = True
                 def say_hi():
                     print("hi there, everyone!")
 
@@ -242,8 +263,8 @@ class app(object):
                     repeEntry.grid_forget()
                     userEntry.grid(row=0, column=0, columnspan=2)
                     passEntry.grid(row=1, column=0, columnspan=2)
-                    loginB.grid(row=2, column=0)
-                    regisB.grid(row=2, column=1)
+                    loginB.grid(row=2, column=0, sticky=tk.W+tk.E)
+                    regisB.grid(row=2, column=1, sticky=tk.W+tk.E)
                     # userEntry.place(relx=0.5, rely=0.4, anchor=tk.CENTER)
                     # passEntry.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
                     # loginB.place(relx=0.45, rely=0.6, anchor=tk.CENTER)
@@ -279,7 +300,7 @@ class app(object):
 
                     loginB.grid_forget()
                     repeEntry.grid(row=3, column=0)
-                    regisB.grid(row=4, column=0)
+                    regisB.grid(row=4, column=0, sticky=tk.W+tk.E)
                     # repeEntry.place(relx=0.5, rely=0.6, anchor=tk.CENTER)
                     # regisB.place(relx=0.5, rely=0.7, anchor=tk.CENTER)
 
@@ -307,8 +328,8 @@ class app(object):
                                     repeEntry.grid_forget()
                                     userEntry.grid(row=0, column=0, columnspan=2)
                                     passEntry.grid(row=1, column=0, columnspan=2)
-                                    loginB.grid(row=2, column=0)
-                                    regisB.grid(row=2, column=1)
+                                    loginB.grid(row=2, column=0, sticky=tk.W+tk.E)
+                                    regisB.grid(row=2, column=1, sticky=tk.W+tk.E)
                                     # userEntry.place(relx=0.5, rely=0.4, anchor=tk.CENTER)
                                     # passEntry.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
                                     # loginB.place(relx=0.45, rely=0.6, anchor=tk.CENTER)
@@ -379,29 +400,95 @@ class app(object):
                     total_assetsL.pack()
                     userNameLL.grid(row=0, column=0)
                     userNameL.grid(row=0, column=1)
-                    group.grid(row=0, column=2, columnspan=2)
-                    stockB.grid(row=3, column=0)
-                    fundB.grid(row=3, column=1)
-                    futuresB.grid(row=3, column=2)
-                    foreign_currencyB.grid(row=3, column=3)
+                    group.grid(row=0, column=2, columnspan=2, sticky=tk.W+tk.E)
+                    loadingStatus.grid(row=2, column=0, columnspan=4)
+                    stockB.grid(row=3, column=0, sticky=tk.W+tk.E)
+                    fundB.grid(row=3, column=1, sticky=tk.W+tk.E)
+                    futuresB.grid(row=3, column=2, sticky=tk.W+tk.E)
+                    foreign_currencyB.grid(row=3, column=3, sticky=tk.W+tk.E)
 
                 def createWelcomeMenu():
                     createMenu()
                     showWelcomeMessage()
 
                 def updateLoadingStatus():
-                    root.title('散户王章涵:上海[%s]，深圳[%s]' % (self.shProgress, self.szProgress))
-                    if running:
-                        root.after(1000, updateLoadingStatus)
+                    def star():
+                        while self.isRunning:
+                            loadingStatus.config(text='更新状态：上海[%s]，深圳[%s]' % (self.shProgress, self.szProgress))
+                            time.sleep(1)
+                        logging.debug('updateLoadingStatus().exit()')
+                    self.updateLoadingStatusSpider = threading.Thread(target=star, name='updateLoadingStatusSpider', daemon=True)
+                    self.updateLoadingStatusSpider.start()
+
+                    # # root.title('散户王章涵:上海[%s]，深圳[%s]' % (self.shProgress, self.szProgress))
+                    # # if not self.isRunning:
+                    # #     running = False
+                    # loadingStatus.config(text='更新状态：上海[%s]，深圳[%s]' % (self.shProgress, self.szProgress))
+                    # if self.isRunning:
+                    #     root.after(1000, updateLoadingStatus)
+                    # else:
+                    #     logging.debug('updateLoadingStatus().exit()')
 
                 def exit():
                     if userName.get() != '请输入用户名':
                         with open('save/' + userName.get(), 'w') as configFile:
                             self.userFile.write(configFile)
                     running = False
+                    self.exit()
                     root.withdraw()
-                    time.sleep(2)
+                    time.sleep(1)
+                    self.HLSpider.join()
+                    self.DPSpider.join()
+                    self.SHSpider.join()
+                    self.SZSpider.join()
+                    self.updateLoadingStatusSpider.join()
                     root.destroy()
+                    logging.debug('root.destroy()')
+
+                def showStockMainPage():
+                    def showSHList():
+                        stockListL.delete(0, tk.END)
+                        for each in self.shList:
+                            stockListL.insert(tk.END, each[0])
+                        shListB.config(state=tk.DISABLED)
+                        szListB.config(state=tk.NORMAL)
+                        ownListB.config(state=tk.NORMAL)
+                    def showSZList():
+                        stockListL.delete(0, tk.END)
+                        for each in self.szList:
+                            stockListL.insert(tk.END, each[0])
+                        szListB.config(state=tk.DISABLED)
+                        shListB.config(state=tk.NORMAL)
+                        ownListB.config(state=tk.NORMAL)
+                    def showOwnList():
+                        stockListL.delete(0, tk.END)
+                        # for each in self.szList:
+                        #     stockListL.insert(tk.END, each[0])
+                        ownListB.config(state=tk.DISABLED)
+                        shListB.config(state=tk.NORMAL)
+                        szListB.config(state=tk.NORMAL)
+                    if hasattr(self, 'shList'):
+                        # 初始化
+                        stockMainPage = tk.Toplevel()
+                        stockMainPage.title('股票')
+                        shListB = tk.Button(stockMainPage, text='上海', command=showSHList, state=tk.DISABLED)
+                        szListB = tk.Button(stockMainPage, text='深圳', command=showSZList)
+                        ownListB = tk.Button(stockMainPage, text='持有', command=showOwnList)
+                        stockListL = tk.Listbox(stockMainPage, height=10, width=20)
+                        for each in self.shList:
+                            stockListL.insert(tk.END, each[0])
+                        stockDetailM = tk.Message(stockMainPage, text='aaa', width=100, relief=tk.GROOVE)
+                        buyStockB = tk.Button(stockMainPage, text='买入')
+                        sellStockB = tk.Button(stockMainPage, text='卖出')
+                        # 布局
+                        shListB.grid(row=0, column=0, sticky=tk.E+tk.W+tk.S+tk.N)
+                        szListB.grid(row=0, column=1, sticky=tk.E+tk.W+tk.S+tk.N)
+                        ownListB.grid(row=0, column=2, sticky=tk.E+tk.W+tk.S+tk.N)
+                        stockListL.grid(row=1, column=0, rowspan=2, columnspan=3, sticky=tk.E+tk.W+tk.S+tk.N)
+                        stockDetailM.grid(row=0, column=3, rowspan=2, columnspan=2, sticky=tk.E+tk.W+tk.S+tk.N, ipady=80)
+                        buyStockB.grid(row=2, column=3, sticky=tk.E+tk.W+tk.S+tk.N)
+                        sellStockB.grid(row=2, column=4, sticky=tk.E+tk.W+tk.S+tk.N)
+
                 def showForeign_currencyMainPage():
                     foreign_currencyMainPage = tk.Toplevel()
                     foreign_currencyInfo = tk.LabelFrame(foreign_currencyMainPage, text="汇率现状")
@@ -417,11 +504,12 @@ class app(object):
                     yourCurrencyInfo.grid(row=0, column=1)
                     exchangeB.grid(row=1, column=0, rowspan=2)
 
+                running = True
                 root = tk.Tk()
                 root.protocol('WM_DELETE_WINDOW', exit)
                 root.title('散户王章涵')
                 # root.geometry('600x400')
-                # root.resizable(0,0)
+                root.resizable(0,0)
                 userName = tk.StringVar()
                 password = tk.StringVar()
                 repeat = tk.StringVar()
@@ -434,12 +522,13 @@ class app(object):
                 userNameL = tk.Label(root)
                 group = tk.LabelFrame(root, text="总资产")
                 total_assetsL = tk.Label(group)
-                stockB = tk.Button(root, text='股票', command=say_hi, state=tk.DISABLED)
+                loadingStatus = tk.Label(root, text='更新状态：')
+                stockB = tk.Button(root, text='股票', command=showStockMainPage)
                 fundB = tk.Button(root, text='基金', command=say_hi, state=tk.DISABLED)
                 futuresB = tk.Button(root, text='期货', command=say_hi, state=tk.DISABLED)
-                foreign_currencyB = tk.Button(root, text='外汇', command=showForeign_currencyMainPage)
-                createLoginPage()
+                foreign_currencyB = tk.Button(root, text='外汇', command=showForeign_currencyMainPage, state=tk.DISABLED)
                 updateLoadingStatus()
+                createLoginPage()
                 root.mainloop()
             GUISpider = threading.Thread(target=showGUI, name='GUI')
             GUISpider.start()
