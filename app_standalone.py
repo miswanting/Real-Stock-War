@@ -1,6 +1,6 @@
 # coding=utf-8
 
-import re, urllib, threading, configparser, logging, http.cookiejar, csv, bs4, tkinter as tk, time, os, hashlib
+import re, urllib, threading, configparser, logging, http.cookiejar, csv, bs4, tkinter as tk, time, os, hashlib, glob
 
 class app(object):
     """docstring for app"""
@@ -22,6 +22,7 @@ class app(object):
         self.handler = urllib.request.HTTPCookieProcessor(self.cookie)
         self.opener = urllib.request.build_opener(self.handler)
 
+        self.doClean()
         self.loadConfig()
         # self.loadUser()
         self.show()
@@ -30,6 +31,9 @@ class app(object):
         # self.analyzeData()
         # self.show()
         # self.loop()
+    def doClean(self):
+        for file in glob.glob('tmp/*'):
+            os.remove(file)
     def loadConfig(self):
         self.urls.read('prefab/urls.cfg')
         self.setting.read('prefab/setting.cfg')
@@ -63,6 +67,9 @@ class app(object):
                             writer.writerow(each)
                     redo = False
                     logging.info('汇率获取完毕。')
+                    if os.path.isfile('storage/huilv.csv'):
+                        os.remove('storage/huilv.csv')
+                    os.rename('tmp/huilv.csv', 'storage/huilv.csv')
                 except Exception as e:
                     logging.error(str(e))
         def getGPCode():
@@ -90,6 +97,12 @@ class app(object):
                         for i in self.szInfo:
                             writer.writerow(i)
                     redo = False
+                    if os.path.isfile('storage/shList.csv'):
+                        os.remove('storage/shList.csv')
+                    os.rename('tmp/shList.csv', 'storage/shList.csv')
+                    if os.path.isfile('storage/szList.csv'):
+                        os.remove('storage/szList.csv')
+                    os.rename('tmp/szList.csv', 'storage/szList.csv')
                 except Exception as e:
                     logging.error(str(e))
         def getDPStatus():
@@ -120,6 +133,9 @@ class app(object):
                             writer.writerow(i)
                     redo = False
                     logging.info('大盘指数获取完毕。')
+                    if os.path.isfile('storage/dpStatus.csv'):
+                        os.remove('storage/dpStatus.csv')
+                    os.rename('tmp/dpStatus.csv', 'storage/dpStatus.csv')
                 except Exception as e:
                     logging.error(str(e))
         def getSHStatus():
@@ -151,6 +167,9 @@ class app(object):
                     redo = False
                     self.shProgress = '刷新完成'
                     logging.info('上海股票行情获取完毕。')
+                    if os.path.isfile('storage/shStatus.csv'):
+                        os.remove('storage/shStatus.csv')
+                    os.rename('tmp/shStatus.csv', 'storage/shStatus.csv')
                 except Exception as e:
                     self.szProgress = '出现问题，等待重试'
                     logging.error(str(e))
@@ -182,6 +201,9 @@ class app(object):
                     redo = False
                     self.szProgress = '刷新完成'
                     logging.info('深圳股票行情获取完毕。')
+                    if os.path.isfile('storage/szStatus.csv'):
+                        os.remove('storage/szStatus.csv')
+                    os.rename('tmp/szStatus.csv', 'storage/szStatus.csv')
                 except Exception as e:
                     self.szProgress = '出现问题，等待重试'
                     logging.error(str(e))
@@ -399,7 +421,7 @@ class app(object):
                 root.protocol('WM_DELETE_WINDOW', exit)
                 root.title('散户王章涵')
                 # root.geometry('600x400')
-                root.resizable(0,0)
+                # root.resizable(0,0)
                 userName = tk.StringVar()
                 password = tk.StringVar()
                 repeat = tk.StringVar()
