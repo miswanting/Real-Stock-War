@@ -436,7 +436,6 @@ class app(object):
                     running = False
                     self.exit()
                     root.withdraw()
-                    time.sleep(1)
                     self.HLSpider.join()
                     self.DPSpider.join()
                     self.SHSpider.join()
