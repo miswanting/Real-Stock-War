@@ -1,6 +1,7 @@
 # coding=utf-8
 
-import re, urllib, threading, configparser, logging, http.cookiejar, csv, bs4, tkinter as tk, time, os, hashlib, glob
+import re, urllib, threading, configparser, logging, http.cookiejar
+import csv, bs4, tkinter as tk, time, os, hashlib, glob, json
 
 class app(object):
     """docstring for app"""
@@ -13,6 +14,13 @@ class app(object):
     szProgress = '未开始'
 
     spacialChar = '↑↓←→↖↙↗↘↕'
+
+    stockInfo = {
+        'shList' : [],
+        'szList' : [],
+        'shStatus' : [],
+        'szStatus' : []
+    }
 
     def __init__(self):
         super(app, self).__init__()
@@ -39,12 +47,31 @@ class app(object):
         logging.debug('程序退出请求已发出！')
 
     def doClean(self):
+        if not os.path.isdir('log'):
+            os.mkdir('log')
+        if not os.path.isdir('tmp'):
+            os.mkdir('tmp')
+        if not os.path.isdir('storage'):
+            os.mkdir('storage')
         for file in glob.glob('tmp/*'):
             os.remove(file)
     def loadConfig(self):
         self.urls.read('prefab/urls.cfg')
         self.setting.read('prefab/setting.cfg')
-        logging.basicConfig(filename='log/app_standalone.log', format='[%(msecs)d][%(levelname)s][%(threadName)s]%(message)s', filemode='w', level=int(self.setting['setting']['logLevel']))
+        logging.basicConfig(filename='log/app_standalone.log', format='[%(asctime)s][%(levelname)s][%(threadName)s]%(message)s', filemode='w', level=int(self.setting['setting']['logLevel']))
+    def refreshStockInfo(self):
+        if os.path.isfile('storage/shList'):
+            with open('storage/shList') as tmpFile:
+                self.stockInfo['shList'] = json.loads(tmpFile.read())
+        if os.path.isfile('storage/szList'):
+            with open('storage/szList') as tmpFile:
+                self.stockInfo['szList'] = json.loads(tmpFile.read())
+        if os.path.isfile('storage/shStatus'):
+            with open('storage/shStatus') as tmpFile:
+                self.stockInfo['shStatus'] = json.loads(tmpFile.read())
+        if os.path.isfile('storage/szStatus'):
+            with open('storage/szStatus') as tmpFile:
+                self.stockInfo['szStatus'] = json.loads(tmpFile.read())
     def fetchData(self):
         def getHL():
             redo = True
@@ -70,16 +97,14 @@ class app(object):
                         huilvInfo.append(each.split(','))
                     # pattern = re.compile('"(.*?),(.*?),(.*?),(.*?),(.*?),(.*?),(.*?),(.*?),(.*?),(.*?),(.*?)"')
                     # huilvInfo = re.findall(pattern, str(huilv))
-                    with open('tmp/huilv.csv', 'w') as csvFile:
-                        writer = csv.writer(csvFile)
-                        for each in huilvInfo:
-                            writer.writerow(each)
+                    with open('tmp/huilv', 'w') as tmpfile:
+                        tmpfile.write(json.dumps(huilvInfo))
                     redo = False
                     logging.info('汇率获取完毕。')
                     if self.isRunning:
                         if os.path.isfile('storage/huilv.csv'):
                             os.remove('storage/huilv.csv')
-                        os.rename('tmp/huilv.csv', 'storage/huilv.csv')
+                        os.rename('tmp/huilv', 'storage/huilv')
                 except Exception as e:
                     logging.error(str(e))
         def getGPCode():
@@ -100,22 +125,18 @@ class app(object):
                     pattern = re.compile('">(.*?)\((.*?)\)<')
                     self.shInfo = re.findall(pattern, str(soup.find_all('ul')[7]))
                     self.szInfo = re.findall(pattern, str(soup.find_all('ul')[8]))
-                    with open('tmp/shList.csv', 'w') as csvFile:
-                        writer = csv.writer(csvFile)
-                        for i in self.shInfo:
-                            writer.writerow(i)
-                    with open('tmp/szList.csv', 'w') as csvFile:
-                        writer = csv.writer(csvFile)
-                        for i in self.szInfo:
-                            writer.writerow(i)
+                    with open('tmp/shList', 'w') as tmpFile:
+                        tmpFile.write(json.dumps(self.shInfo))
+                    with open('tmp/szList', 'w') as tmpFile:
+                        tmpFile.write(json.dumps(self.szInfo))
                     redo = False
                     if self.isRunning:
-                        if os.path.isfile('storage/shList.csv'):
-                            os.remove('storage/shList.csv')
-                        os.rename('tmp/shList.csv', 'storage/shList.csv')
-                        if os.path.isfile('storage/szList.csv'):
-                            os.remove('storage/szList.csv')
-                        os.rename('tmp/szList.csv', 'storage/szList.csv')
+                        if os.path.isfile('storage/shList'):
+                            os.remove('storage/shList')
+                        os.rename('tmp/shList', 'storage/shList')
+                        if os.path.isfile('storage/szList'):
+                            os.remove('storage/szList')
+                        os.rename('tmp/szList', 'storage/szList')
                 except Exception as e:
                     logging.error(str(e))
         def getDPStatus():
@@ -142,16 +163,14 @@ class app(object):
                                 tmp = info.split(',')
                                 logging.debug('已获取大盘指数"%s"的信息。(%s/%s)' % (tmp[0], i, len(dpStatusList.split('\n'))))
                                 self.dpList.append(tmp)
-                    with open('tmp/dpStatus.csv', 'w') as csvFile:
-                        writer = csv.writer(csvFile)
-                        for i in self.dpList:
-                            writer.writerow(i)
+                    with open('tmp/dpStatus', 'w') as tmpFile:
+                        tmpFile.write(json.dumps(self.dpList))
                     redo = False
                     logging.info('大盘指数获取完毕。')
                     if self.isRunning:
-                        if os.path.isfile('storage/dpStatus.csv'):
-                            os.remove('storage/dpStatus.csv')
-                        os.rename('tmp/dpStatus.csv', 'storage/dpStatus.csv')
+                        if os.path.isfile('storage/dpStatus'):
+                            os.remove('storage/dpStatus')
+                        os.rename('tmp/dpStatus', 'storage/dpStatus')
                 except Exception as e:
                     logging.error(str(e))
         def getSHStatus():
@@ -180,10 +199,8 @@ class app(object):
                             logging.debug('已获取上海"%s"的股票行情。(%s/%s)' % (tmp[0], i, len(self.shInfo)))
                             self.shProgress = '%s/%s' % (i, len(self.shInfo))
                             self.shList.append(tmp)
-                    with open('tmp/shStatus.csv', 'w') as csvFile:
-                        writer = csv.writer(csvFile)
-                        for i in self.shList:
-                            writer.writerow(i)
+                    with open('tmp/shStatus', 'w') as tmpFile:
+                        tmpFile.write(json.dumps(self.shList))
                     redo = False
                     self.shProgress = '刷新完成'
                     logging.info('上海股票行情获取完毕。')
@@ -219,10 +236,8 @@ class app(object):
                             logging.debug('已获取深圳"%s"的股票行情。(%s/%s)' % (tmp[0], i, len(self.szInfo)))
                             self.szProgress = '%s/%s' % (i, len(self.szInfo))
                             self.szList.append(tmp)
-                    with open('tmp/szStatus.csv', 'w') as csvFile:
-                        writer = csv.writer(csvFile)
-                        for i in self.szList:
-                            writer.writerow(i)
+                    with open('tmp/szStatus', 'w') as tmpFile:
+                        tmpFile.write(json.dumps(self.szList))
                     redo = False
                     self.szProgress = '刷新完成'
                     logging.info('深圳股票行情获取完毕。')
@@ -280,9 +295,10 @@ class app(object):
                             if each == userName.get():
                                 isExist = True
                     if isExist:
-                        self.userFile = configparser.ConfigParser()
-                        self.userFile.read('save/' + userName.get())
-                        if self.userFile['Account']['pw'] == hashlib.md5(str.encode(password.get())).hexdigest():
+                        self.userFile = {}
+                        with open('save/' + userName.get(), 'r') as userFile:
+                            self.userFile = json.loads(userFile.readlines()[0])
+                        if self.userFile['pw'] == hashlib.md5(str.encode(password.get())).hexdigest():
                             userEntry.grid_forget()
                             passEntry.grid_forget()
                             loginB.grid_forget()
@@ -317,23 +333,28 @@ class app(object):
                             if isExist:
                                 print('用户已存在！')
                             else:
-                                self.userFile = configparser.ConfigParser()
-                                self.userFile['Account'] = {
+                                # self.userFile = configparser.ConfigParser()
+                                self.userFile = {
+                                'name' : userName.get(),
                                 'pw' : hashlib.md5(str.encode(password.get())).hexdigest(),
                                 'group' : 'player',
-                                'total_assets' : 0
+                                'total_assets' : 0,
+                                'ownStock' : {},
+                                'ownFund' : {},
+                                'ownFutures' : {},
+                                'ownForeignCurrency' : {}
                                 }
-                                with open('save/' + userName.get(), 'w') as configFile:
-                                    self.userFile.write(configFile)
-                                    repeEntry.grid_forget()
-                                    userEntry.grid(row=0, column=0, columnspan=2)
-                                    passEntry.grid(row=1, column=0, columnspan=2)
-                                    loginB.grid(row=2, column=0, sticky=tk.W+tk.E)
-                                    regisB.grid(row=2, column=1, sticky=tk.W+tk.E)
-                                    # userEntry.place(relx=0.5, rely=0.4, anchor=tk.CENTER)
-                                    # passEntry.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
-                                    # loginB.place(relx=0.45, rely=0.6, anchor=tk.CENTER)
-                                    # regisB.place(relx=0.55, rely=0.6, anchor=tk.CENTER)
+                                with open('save/' + userName.get(), 'w') as userFile:
+                                    userFile.write(json.dumps(self.userFile))
+                                repeEntry.grid_forget()
+                                userEntry.grid(row=0, column=0, columnspan=2)
+                                passEntry.grid(row=1, column=0, columnspan=2)
+                                loginB.grid(row=2, column=0, sticky=tk.W+tk.E)
+                                regisB.grid(row=2, column=1, sticky=tk.W+tk.E)
+                                # userEntry.place(relx=0.5, rely=0.4, anchor=tk.CENTER)
+                                # passEntry.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
+                                # loginB.place(relx=0.45, rely=0.6, anchor=tk.CENTER)
+                                # regisB.place(relx=0.55, rely=0.6, anchor=tk.CENTER)
                         else:
                             print('两次输入密码不一致，请重新输入')
                             password.set('')
@@ -380,7 +401,7 @@ class app(object):
 
                 def newGame():
                     def yes():
-                        self.userFile['Account']['total_assets'] = '10000000'
+                        self.userFile['total_assets'] = '10000000'
                         ask.destroy()
                         showWelcomeMessage()
                     ask = tk.Toplevel()
@@ -396,12 +417,12 @@ class app(object):
                 def showWelcomeMessage():
                     userNameLL.config(text='账户名：')
                     userNameL.config(text=userName.get())
-                    total_assetsL.config(text=self.userFile['Account']['total_assets'])
+                    total_assetsL.config(text=self.userFile['total_assets'])
                     total_assetsL.pack()
                     userNameLL.grid(row=0, column=0)
                     userNameL.grid(row=0, column=1)
                     group.grid(row=0, column=2, columnspan=2, sticky=tk.W+tk.E)
-                    loadingStatus.grid(row=2, column=0, columnspan=4)
+                    loadingStatus.grid(row=4, column=0, columnspan=4)
                     stockB.grid(row=3, column=0, sticky=tk.W+tk.E)
                     fundB.grid(row=3, column=1, sticky=tk.W+tk.E)
                     futuresB.grid(row=3, column=2, sticky=tk.W+tk.E)
@@ -431,8 +452,8 @@ class app(object):
 
                 def exit():
                     if userName.get() != '请输入用户名':
-                        with open('save/' + userName.get(), 'w') as configFile:
-                            self.userFile.write(configFile)
+                        with open('save/' + userName.get(), 'w') as userFile:
+                            userFile.write(json.dumps(self.userFile))
                     running = False
                     self.exit()
                     root.withdraw()
@@ -461,11 +482,27 @@ class app(object):
                         ownListB.config(state=tk.NORMAL)
                     def showOwnList():
                         stockListL.delete(0, tk.END)
-                        # for each in self.szList:
-                        #     stockListL.insert(tk.END, each[0])
+                        for each in self.userFile['ownStock']:
+                            stockListL.insert(tk.END, each[0])
                         ownListB.config(state=tk.DISABLED)
                         shListB.config(state=tk.NORMAL)
                         szListB.config(state=tk.NORMAL)
+                    def chooseStock(event):
+                        tmp = [self.shList[int(stock)] for stock in stockListL.curselection()]
+                        print(tmp)
+                        stockDetailM.config(text='%s的当前价格为：%s（元/股）' % (stockListL.get(stockListL.curselection()), tmp[0][3]))
+                        # stockDetailM.config(text=stockListL.get(stockListL.curselection()))
+                    def showBuyStockPage():
+                        def buy():
+                            self.userFile['ownStock'][stockListL.get(stockListL.curselection())] = [self.shList[int(stock)] for stock in stockListL.curselection()][3]
+                        buyStockPage = tk.Toplevel()
+                        buyStockPage.title('购买股票')
+                        spin = tk.Spinbox(buyStockPage, from_=0, to=1000000000)
+                        buyB = tk.Button(buyStockPage, text='买', command=buy)
+                        spin.pack()
+                        buyB.pack()
+                    def showSellStockPage():
+                        pass
                     if hasattr(self, 'shList'):
                         # 初始化
                         stockMainPage = tk.Toplevel()
@@ -474,11 +511,12 @@ class app(object):
                         szListB = tk.Button(stockMainPage, text='深圳', command=showSZList)
                         ownListB = tk.Button(stockMainPage, text='持有', command=showOwnList)
                         stockListL = tk.Listbox(stockMainPage, height=10, width=20)
+                        stockListL.bind('<ButtonRelease-1>', chooseStock)
                         for each in self.shList:
                             stockListL.insert(tk.END, each[0])
-                        stockDetailM = tk.Message(stockMainPage, text='aaa', width=100, relief=tk.GROOVE)
-                        buyStockB = tk.Button(stockMainPage, text='买入')
-                        sellStockB = tk.Button(stockMainPage, text='卖出')
+                        stockDetailM = tk.Message(stockMainPage, text='请选择左侧股票查看详情', width=100, relief=tk.GROOVE)
+                        buyStockB = tk.Button(stockMainPage, text='买入', command=showBuyStockPage)
+                        sellStockB = tk.Button(stockMainPage, text='卖出', command=showSellStockPage)
                         # 布局
                         shListB.grid(row=0, column=0, sticky=tk.E+tk.W+tk.S+tk.N)
                         szListB.grid(row=0, column=1, sticky=tk.E+tk.W+tk.S+tk.N)
@@ -506,7 +544,6 @@ class app(object):
                 running = True
                 root = tk.Tk()
                 root.protocol('WM_DELETE_WINDOW', exit)
-                root.title('散户王章涵')
                 # root.geometry('600x400')
                 root.resizable(0,0)
                 userName = tk.StringVar()
