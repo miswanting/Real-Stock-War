@@ -4,7 +4,7 @@ del *.log
 cd dist
 del *.log
 cls
-call app_standalone.py
+call python app_standalone.py
 cd ..
 move /Y dist\*.log .\
 pause

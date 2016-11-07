@@ -9,9 +9,13 @@ class GUI(object):
     isRunning = True
     root = tk.TK()
     def __init__(self):
-        super(GUI, self).__init__()
+        self.log = logging.getLogger('GUI')
+        handler = logging.FileHandler('gui.log', 'w')
+        handler.setLevel(logging.DEBUG)
+        formatter = logging.Formatter('%(relativeCreated)d[%(levelname).4s][%(threadName)-.10s]%(message)s')
+        handler.setFormatter(formatter)
+        self.log.addHandler(handler)
         self.root.withdraw()
         self.showLoginPage()
     def showLoginPage(self):
         loginPage = tk.Toplevel()
-        username
