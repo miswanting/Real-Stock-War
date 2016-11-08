@@ -143,8 +143,6 @@ class app(object):
             redo = True
             while redo:
                 try:
-                    if not self.isRunning:
-                        break
                     logging.info('正在获取查询大盘指数…')
                     self.DPStatusURL = self.urls['urls']['大盘指数查询']
                     # 构建请求

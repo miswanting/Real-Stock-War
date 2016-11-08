@@ -1,5 +1,5 @@
 .csv
-.log
+*.log
 .idea
 dist/tmp/*
 dist/storage/*
@@ -7,3 +7,4 @@ dist/save/*
 dist/log/*
 dist/_*
 *.html
+gui/_*

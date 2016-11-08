@@ -1,6 +1,6 @@
 @echo off
 setlocal enabledelayedexpansion
-set /p MainFileName=<main.cfg
+set /p MainFileName=<_DES_MAIN.cfg
 goto %1
 echo 1.Generate Spec File
 echo 2.Pack
