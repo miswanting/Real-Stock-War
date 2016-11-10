@@ -29,6 +29,10 @@ api_sinajs = 'http://hq.sinajs.cn/rn={}&list={}'
 key_stock_code = '">(.*?)\((.*?)\)<'
 
 
+def get_current_time():
+    return str(int(time.time()))
+
+
 class App:
     """
 
@@ -87,11 +91,12 @@ class App:
         def show():
             app = PyQt5.QtWidgets.QApplication(sys.argv)
             MainWindow = PyQt5.QtWidgets.QMainWindow()
-            ui = window_main()
-            ui.setupUi(MainWindow)
+            self.ui = window_main()
+            self.ui.setupUi(MainWindow)
             MainWindow.show()
             sys.exit(app.exec_())
-        t_gui=threading.Thread(target=show)
+
+        t_gui = threading.Thread(target=show)
         t_gui.start()
 
     def show_cache(self):
@@ -103,11 +108,28 @@ class App:
         def Star():
             """伴飞卫星"""
             self.isRunning['Star'] = True
+            shStatus = ''
+            szStatus = ''
             while self.isRunning['Star']:
-                try:
-                    pass
-                except:
-                    pass
+                if 'stockCode_sh' in self.gameData:
+                    self.shStatus = '正在获取信息：{:.2f}%'
+                    if 'data_sh' in self.gameData:
+                        rate = len(self.gameData['data_sh'].items()) / len(self.gameData['stockCode_sh'])
+                        self.shStatus = self.shStatus.format(rate * 100)
+                else:
+                    self.shStatus = '正在获取代码'
+
+                if 'stockCode_sz' in self.gameData:
+                    self.szStatus = '正在获取信息：{:.2f}%'
+                    if 'data_sz' in self.gameData:
+                        rate = len(self.gameData['data_sz'].items()) / len(self.gameData['stockCode_sz'])
+                        self.szStatus = self.szStatus.format(rate * 100)
+                else:
+                    self.szStatus = '正在获取代码'
+
+                if 'ui' in dir(self):
+                    self.ui.statusbar.showMessage('上海：{}；深圳：{}。'.format(self.shStatus, self.szStatus))
+                time.sleep(0.1)
 
         def fetchDaPanData():
             """查询大盘信息"""
@@ -132,15 +154,13 @@ class App:
                     response = self.opener.open(request, timeout=self.timeout)
                     # 解码
                     stockList = response.read().decode('gbk')
-                    logging.debug(stockList)
                     soup = bs4.BeautifulSoup(stockList, 'lxml')
                     pattern = re.compile('">(.*?)\((.*?)\)<')
                     self.gameData['stockCode_sh'] = re.findall(pattern, str(soup.find_all('ul')[7]))
                     self.gameData['stockCode_sz'] = re.findall(pattern, str(soup.find_all('ul')[8]))
-                    logging.debug(self.gameData['stockCode_sh'],self.gameData['stockCode_sz'])
                     self.isRunning['fetchStockCode'] = False
                 except Exception as e:
-                    pass
+                    logging.debug('fetchStockCode崩溃')
 
         def fetchSHStock():
             """用已保存的股票代码查询上证综合股票当前信息"""
@@ -148,27 +168,46 @@ class App:
             if 'data_sh' not in self.gameData:
                 self.gameData['data_sh'] = {}
             while self.isRunning['fetchSHStock']:
-                try:
-                    logging.info('正在获取上海股票信息…')
-                    for i, v in enumerate(self.gameData['stockCode_sh']):
-                        # 构建请求
-                        request = urllib.request.Request(api_sinajs + 'sh' + v[1])
-                        # 获取响应
-                        response = self.opener.open(request, timeout=self.timeout)
-                        # 解码
-                        shStatusList = response.read().decode('gbk')
-                        logging.debug(shStatusList)
-                        info = shStatusList.split('"')[1]
-                        if info == '':
-                            pass
-                        else:
-                            tmp = info.split(',')
-                            logging.debug('已获取上海"%s"的股票行情。(%s/%s)' % (tmp[0], i, len(self.gameData['stockCode_sh'])))
-                            self.gameData['data_sh'][tmp[0]] = tmp
-                    logging.info('上海股票行情获取完毕。')
-                    self.isRunning['fetchSHStock'] = False
-                except Exception as e:
-                    pass
+                if 'stockCode_sh' not in self.gameData:
+                    time.sleep(0.1)
+                else:
+                    try:
+                        logging.info('正在获取上海股票信息…')
+                        for i, v in enumerate(self.gameData['stockCode_sh']):
+                            # 构建请求
+                            request = urllib.request.Request(api_sinajs.format(get_current_time(), 'sh' + v[1]))
+                            # 获取响应
+                            response = self.opener.open(request, timeout=self.timeout)
+                            # 解码
+                            shStatusList = response.read().decode('gbk')
+                            info = shStatusList.split('"')[1]
+                            if info == '':
+                                print(v[0])
+                            else:
+                                tmp = info.split(',')
+                                tmp[0] = tmp[0].replace(' ', '')
+                                logging.debug(
+                                    '已获取上海"%s"的股票行情。(%s/%s)' % (tmp[0], i, len(self.gameData['stockCode_sh'])))
+                                self.gameData['data_sh'][tmp[0]] = tmp
+
+                        tmp = []
+                        for each in self.gameData['data_sh'].items():
+                            tmp.append(each[0])
+                        remain = []
+                        for each in self.gameData['stockCode_sh']:
+                            if each[0] not in tmp:
+                                remain.append(each[0])
+                        text = '上海股票行情获取完毕。总数{}支，已加载{}支，未加载{}支。'
+                        text = text.format(len(self.gameData['stockCode_sh']), len(self.gameData['data_sh'].items()),
+                                           len(remain))
+                        logging.info(text)
+                        self.isRunning['fetchSHStock'] = False
+
+                    except urllib.error.URLError as e:
+                        print(str(e))
+                        logging.debug('fetchSHStock崩溃')
+                        logging.error(str(e))
+                        time.sleep(0.1)
 
         def fetchSZStock():
             """用已保存的股票代码查询深证成份股票当前信息"""
@@ -176,27 +215,45 @@ class App:
             if 'data_sz' not in self.gameData:
                 self.gameData['data_sz'] = {}
             while self.isRunning['fetchSZStock']:
-                try:
-                    logging.info('正在获取深圳股票信息…')
-                    for i, v in enumerate(self.gameData['stockCode_sz']):
-                        # 构建请求
-                        request = urllib.request.Request(api_sinajs + 'sz' + v[1])
-                        # 获取响应
-                        response = self.opener.open(request, timeout=self.timeout)
-                        # 解码
-                        szStatusList = response.read().decode('gbk')
-                        logging.debug(szStatusList)
-                        info = szStatusList.split('"')[1]
-                        if info == '':
-                            pass
-                        else:
-                            tmp = info.split(',')
-                            logging.debug('已获取深圳"%s"的股票行情。(%s/%s)' % (tmp[0], i, len(self.szInfo)))
-                            self.gameData['data_sz'][tmp[0]] = tmp
-                    logging.info('深圳股票行情获取完毕。')
-                    self.isRunning['fetchSZStock'] = False
-                except Exception as e:
-                    pass
+                if 'stockCode_sz' not in self.gameData:
+                    time.sleep(0.1)
+                else:
+                    try:
+                        logging.info('正在获取深圳股票信息…')
+                        for i, v in enumerate(self.gameData['stockCode_sz']):
+                            # 构建请求
+                            request = urllib.request.Request(api_sinajs.format(get_current_time(), 'sz' + v[1]))
+                            # 获取响应
+                            response = self.opener.open(request, timeout=self.timeout)
+                            # 解码
+                            szStatusList = response.read().decode('gbk')
+                            info = szStatusList.split('"')[1]
+                            if info == '':
+                                print(v[0])
+                            else:
+                                tmp = info.split(',')
+                                tmp[0] = tmp[0].replace(' ', '')
+                                logging.debug(
+                                    '已获取深圳"%s"的股票行情。(%s/%s)' % (tmp[0], i, len(self.gameData['stockCode_sz'])))
+                                self.gameData['data_sz'][tmp[0]] = tmp
+
+                        tmp = []
+                        for each in self.gameData['data_sz'].items():
+                            tmp.append(each[0])
+                        remain = []
+                        for each in self.gameData['stockCode_sz']:
+                            if each[0] not in tmp:
+                                remain.append(each[0])
+                        text = '深圳股票行情获取完毕。总数{}支，已加载{}支，未加载{}支。'
+                        text = text.format(len(self.gameData['stockCode_sz']), len(self.gameData['data_sz'].items()),
+                                           len(remain))
+                        logging.info(text)
+                        self.isRunning['fetchSZStock'] = False
+                    except urllib.error.URLError as e:
+                        print(str(e))
+                        logging.debug('fetchSZStock崩溃')
+                        logging.error(str(e))
+                        time.sleep(0.1)
 
         star = threading.Thread(target=Star)
         dapan = threading.Thread(target=fetchDaPanData)
@@ -209,9 +266,10 @@ class App:
         shStock.start()
         szStock.start()
 
-class window_main(PyQt5.QtWidgets.QMainWindow,gui.MainWindow.Ui_MainWindow):
-    def go(self):
-        print(self.label_accountName.text())
+
+class window_main(PyQt5.QtWidgets.QMainWindow, gui.MainWindow.Ui_MainWindow):
+    pass
+
 
 if __name__ == '__main__':
     I = App()
