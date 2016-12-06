@@ -310,10 +310,12 @@ class App:
                 null_list.append(codeList[i])
                 text = 'api返回Null。{}■{}'
                 text = text.format(codeList[i], line)
+                logging.debug(text)
             elif info_string == 'FAILED':
                 fail_list.append(codeList[i])
                 text = 'api返回FAILED。{}■{}'
                 text = text.format(codeList[i], line)
+                logging.debug(text)
             else:
                 info = info_string.split(',')
                 info[0] = info[0].replace(' ', '')
