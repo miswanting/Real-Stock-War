@@ -91,7 +91,7 @@ class App:
         def show():
             app = PyQt5.QtWidgets.QApplication(sys.argv)
             main_window = PyQt5.QtWidgets.QMainWindow()
-            self.ui = MainWindow()
+            self.ui = Main_Window()
             self.ui.setupUi(main_window)
             main_window.show()
             sys.exit(app.exec_())
