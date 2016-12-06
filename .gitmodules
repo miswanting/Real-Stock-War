@@ -1,3 +1,6 @@
 [submodule "DevEnvSys"]
 	path = DevEnvSys
 	url = https://github.com/miswanting/DevEnvSys.git
+[submodule "Real-Stock-War.wiki"]
+	path = Real-Stock-War.wiki
+	url = https://github.com/miswanting/Real-Stock-War.wiki.git
