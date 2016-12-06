@@ -293,8 +293,39 @@ class App:
         shStock.start()
         szStock.start()
 
+    def api_get_sinajs(self, time, codeList):
+        # 构建请求
+        request = urllib.request.Request(api_sinajs.format(time, ','.join(codeList)))
+        # 获取响应
+        response = self.opener.open(request, timeout=self.timeout)
+        # 解码
+        raw_respond = response.read().decode('gbk')
+        respond_string_list = raw_respond.split('\n')
+        info_list = []
+        null_list = []
+        fail_list = []
+        for i, line in enumerate(respond_string_list):
+            info_string = line.split('"')[1]
+            if info_string == '':
+                null_list.append(codeList[i])
+                text = 'api返回Null。{}■{}'
+                text = text.format(codeList[i], line)
+            elif info_string == 'FAILED':
+                fail_list.append(codeList[i])
+                text = 'api返回FAILED。{}■{}'
+                text = text.format(codeList[i], line)
+            else:
+                info = info_string.split(',')
+                info[0] = info[0].replace(' ', '')
+                info_list.append(info)
+        info_dict = {}
+        info_dict['info_list'] = info_list
+        info_dict['null_list'] = null_list
+        info_dict['fail_list'] = fail_list
+        return info_dict
 
-class MainWindow(PyQt5.QtWidgets.QMainWindow, gui.MainWindow.Ui_MainWindow):
+
+class Main_Window(PyQt5.QtWidgets.QMainWindow, gui.MainWindow.Ui_MainWindow):
     def _set_status_bar_text(self, text):
         self.statusbar.showMessage(text)
 
