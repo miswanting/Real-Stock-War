@@ -93,6 +93,7 @@ class App:
             main_window = PyQt5.QtWidgets.QMainWindow()
             self.ui = Main_Window()
             self.ui.setupUi(main_window)
+            self.ui.init(self.gameData)
             main_window.show()
             sys.exit(app.exec_())
 
@@ -128,7 +129,7 @@ class App:
                     self.szStatus = '正在获取代码'
 
                 if 'ui' in dir(self):
-                    self.ui.statusbar.showMessage('上海：{}；深圳：{}。'.format(self.shStatus, self.szStatus))
+                    self.ui.set_status_bar_text('上海：{}；深圳：{}。'.format(self.shStatus, self.szStatus))
                 time.sleep(0.1)
 
         def fetchDaPanData():
@@ -382,8 +383,53 @@ class App:
 
 
 class Main_Window(PyQt5.QtWidgets.QMainWindow, gui.MainWindow.Ui_MainWindow):
+    change_status_text = PyQt5.QtCore.pyqtSignal(str)
+    add_list_widget_sh_item = PyQt5.QtCore.pyqtSignal(str)
+    add_list_widget_sz_item = PyQt5.QtCore.pyqtSignal(str)
+
+    def init(self, gameData):
+        self.gameData = gameData
+        self.change_status_text.connect(self._set_status_bar_text)
+        self.add_list_widget_sh_item.connect(self._add_list_widget_sh)
+        self.add_list_widget_sz_item.connect(self._add_list_widget_sz)
+        self.listWidget_sh.itemClicked.connect(self._list_widget_sh_item_clicked)
+
+    def set_status_bar_text(self, text):
+        self.change_status_text.emit(text)
+
     def _set_status_bar_text(self, text):
         self.statusbar.showMessage(text)
+
+    def add_list_widget_sh(self, text):
+        self.add_list_widget_sh_item.emit(text)
+
+    def _add_list_widget_sh(self, text):
+        item = PyQt5.QtWidgets.QListWidgetItem()
+        item.setText(text)
+        self.listWidget_sh.addItem(item)
+
+    def add_list_widget_sz(self, text):
+        self.add_list_widget_sz_item.emit(text)
+
+    def _add_list_widget_sz(self, text):
+        item = PyQt5.QtWidgets.QListWidgetItem()
+        item.setText(text)
+        self.listWidget_sz.addItem(item)
+
+    def _list_widget_sh_item_clicked(self, item):
+        print(item.text())
+        for each in self.gameData['new_data_sh'].keys():
+            if self.gameData['new_data_sh'][each][0] == item.text():
+                newList = self.gameData['new_data_sh'][each]
+                newList[0] = '名称：' + newList[0]
+                newList[1] = '今开：' + newList[1]
+                newList[2] = '昨收：' + newList[2]
+                newList[3] = '当前：' + newList[3]
+                newList[4] = '最高：' + newList[4]
+                newList[5] = '最低：' + newList[5]
+                tmp = '\n'.join(newList[:6])
+                self.label_sh.setText(tmp)
+                break
 
 
 if __name__ == '__main__':
