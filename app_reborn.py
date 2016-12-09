@@ -282,6 +282,9 @@ class Main_Window(PyQt5.QtWidgets.QMainWindow, gui.MainWindow.Ui_MainWindow):
         self.add_list_widget_sh_item.connect(self._add_list_widget_sh)
         self.add_list_widget_sz_item.connect(self._add_list_widget_sz)
         self.listWidget_sh.itemClicked.connect(self._list_widget_sh_item_clicked)
+        self.listWidget_sz.itemClicked.connect(self._list_widget_sz_item_clicked)
+        self.pushButton_sh.released.connect(self._push_button_sh_clicked)
+        self.pushButton_sz.released.connect(self._push_button_sz_clicked)
 
     def set_status_bar_text(self, text):
         self.change_status_text.emit(text)
@@ -319,6 +322,27 @@ class Main_Window(PyQt5.QtWidgets.QMainWindow, gui.MainWindow.Ui_MainWindow):
                 tmp = '\n'.join(newList[:6])
                 self.label_sh.setText(tmp)
                 break
+
+    def _list_widget_sz_item_clicked(self, item):
+        print(item.text())
+        for each in self.gameData['new_data_sz'].keys():
+            if self.gameData['new_data_sz'][each][0] == item.text():
+                newList = self.gameData['new_data_sz'][each]
+                newList[0] = '名称：' + newList[0]
+                newList[1] = '今开：' + newList[1]
+                newList[2] = '昨收：' + newList[2]
+                newList[3] = '当前：' + newList[3]
+                newList[4] = '最高：' + newList[4]
+                newList[5] = '最低：' + newList[5]
+                tmp = '\n'.join(newList[:6])
+                self.label_sz.setText(tmp)
+                break
+
+    def _push_button_sh_clicked(self):
+        print(self.listWidget_sh.currentItem().text())
+
+    def _push_button_sz_clicked(self):
+        print(self.listWidget_sz.currentItem().text())
 
 
 if __name__ == '__main__':
