@@ -1,4 +1,4 @@
-# real-stock-war
+# **Real-Stock-War**
 
 这个游戏毫无疑问很好很强大！
 
@@ -30,6 +30,17 @@ http://vip.stock.finance.sina.com.cn/quotes_service/view/vML_DataList.php?asc=j&
 
 ## 数据结构
 
+### App.gameData：游戏核心储存。
+
+```json
+App.gameData = {
+    'stockCode_sh' = '',
+    'new_data_sh' = '',
+    'stockCode_sz' = '',
+    'new_data_sz' = ''
+}
+```
+
 ### api_get_sinajs：
 
 ```json
@@ -37,3 +48,70 @@ code_raw_dict = {
     'code' = 'var hq_str_s_sh000001="上证指数,3230.1095,14.7437,0.46,1957242,21687605";'
 }
 ```
+### 股票
+
+名称
+
+今开
+
+昨收
+
+当前
+
+最高
+
+最低
+
+买①
+
+卖①
+
+时间？
+
+时间？
+
+买①数量
+
+买①价格
+
+买②数量
+
+买②价格
+
+买③数量
+
+买③价格
+
+买④数量
+
+买④价格
+
+买⑤数量
+
+买⑤价格
+
+卖①数量
+
+卖①价格
+
+卖②数量
+
+卖②价格
+
+卖③数量
+
+卖③价格
+
+卖④数量
+
+卖④价格
+
+卖⑤数量
+
+卖⑤价格
+
+年月日
+
+时分秒
+
+？
