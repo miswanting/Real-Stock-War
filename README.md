@@ -27,3 +27,13 @@ http://hq.sinajs.cn/rn=1478508106794&list=s_sh000001,s_sz399001,CFF_RE_IC1611,rt
 股票 新股 港股 美股 基金 期货 外汇 黄金 债券
 
 http://vip.stock.finance.sina.com.cn/quotes_service/view/vML_DataList.php?asc=j&symbol=sh601015&num=11
+
+## 数据结构
+
+### api_get_sinajs：
+
+```json
+code_raw_dict = {
+    'code' = 'var hq_str_s_sh000001="上证指数,3230.1095,14.7437,0.46,1957242,21687605";'
+}
+```

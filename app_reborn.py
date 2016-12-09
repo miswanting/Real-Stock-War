@@ -240,11 +240,16 @@ class App:
                         tmp = []
                         for each in self.gameData['new_data_sz'].items():
                             tmp.append(each[0])
-                        print(len(tmp))
                         remainList = []
                         for each in self.gameData['stockCode_sz']:
                             if each[0] not in tmp:
                                 remainList.append(each)
+                        ###
+                        newList = []
+                        for each in remainList:
+                            newList.append('sz' + each[1])
+                        self.api_get_sinajs(get_current_time(), newList)
+                        ###
                         for i, v in enumerate(remainList):
                             # 构建请求
                             request = urllib.request.Request(api_sinajs.format(get_current_time(), 'sz' + v[1]))
@@ -294,17 +299,65 @@ class App:
         szStock.start()
 
     def api_get_sinajs(self, time, codeList):
-        # 构建请求
-        request = urllib.request.Request(api_sinajs.format(time, ','.join(codeList)))
-        # 获取响应
-        response = self.opener.open(request, timeout=self.timeout)
-        # 解码
-        raw_respond = response.read().decode('gbk')
-        respond_string_list = raw_respond.split('\n')
+        """
+        :param time:int
+        :param codeList:string_list
+        :return info_dict:list_dict
+        """
+        retry_time = 3
+        num_of_each_ask = 10
+        ask_times = int(len(codeList) / num_of_each_ask) + 1
+        # 把请求进行组合
+        request_code_dict = {}
+        for i in range(ask_times):
+            request_code_dict[','.join(codeList[i * num_of_each_ask:i * num_of_each_ask + num_of_each_ask])] = False
+        # 生成代码与回复对应的字典
+        code_raw_dict = {}
+        retry = True
+        while retry:
+            for each in request_code_dict.keys():
+                # 构建请求
+                request = urllib.request.Request(api_sinajs.format(time, each))
+                # 获取响应
+                response = self.opener.open(request, timeout=self.timeout)
+                # 解码
+                try:
+                    raw_respond = response.read().decode('gbk')
+                except urllib.error.URLError as e:
+                    pass
+                else:
+                    respond_string_list = raw_respond.split('\n')
+                    for i, every in enumerate(respond_string_list):
+                        if every != '':
+                            code_raw_dict[each.split(',')[i]] = every
+                        else:
+                            pass
+                    request_code_dict[each] = True
+                finally:
+                    retry = False
+                    for every in request_code_dict.keys():
+                        if not request_code_dict[every]:
+                            retry = True
+        # 生成列表
+        code_info_dict = {}
+        for each in code_raw_dict.keys():
+            value = code_raw_dict[each].split('"')[1]
+            if value == '':
+                pass
+            elif value == 'FAILED':
+                pass
+            else:
+                info = value.split(',')
+                info[0] = info[0].replace(' ', '')
+                info[0] = info[0].replace('　', '')
+                code_info_dict[each]=info
+        print(code_info_dict)
+        return code_info_dict
+
         info_list = []
         null_list = []
         fail_list = []
-        for i, line in enumerate(respond_string_list):
+        for i, each in enumerate(code_raw_dict.keys()):
             info_string = line.split('"')[1]
             if info_string == '':
                 null_list.append(codeList[i])
@@ -319,6 +372,7 @@ class App:
             else:
                 info = info_string.split(',')
                 info[0] = info[0].replace(' ', '')
+                info[0] = info[0].replace('　', '')
                 info_list.append(info)
         info_dict = {}
         info_dict['info_list'] = info_list
