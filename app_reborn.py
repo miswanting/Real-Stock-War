@@ -65,20 +65,16 @@ class App:
         self.fetch_data()
 
     def firstRun(self):
-        if not os.path.isdir('log'):
-            os.mkdir('log')
         if not os.path.isdir('tmp'):
-            os.mkdir('tmp')
+            os.mkdir('tmp')  # 用于外部代码资料储存
         if not os.path.isdir('save'):
-            os.mkdir('save')
+            os.mkdir('save')  # 用于存档
         if not os.path.isdir('data'):
-            os.mkdir('data')
-        if not os.path.isdir('gui'):
-            os.mkdir('gui')
+            os.mkdir('data')  # 用于内部代码资料储存
         if not os.path.isdir('ai'):
-            os.mkdir('ai')
+            os.mkdir('ai')  # 用于储存外部AI脚本
         for file in glob.glob('tmp/*'):
-            os.remove(file)
+            os.remove(file)  # 清理tmp的外部代码资料储存
 
     def load_config(self):
         pass
@@ -226,9 +222,8 @@ class App:
         :param codeList:string_list
         :return info_dict:list_dict
         """
-        retry_time = 3
-        num_of_each_ask = 10
-        ask_times = int(len(codeList) / num_of_each_ask) + 1
+        num_of_each_ask = 10  # 每次网络请求所询问的资料数量
+        ask_times = int(len(codeList) / num_of_each_ask) + 1  # 计算出一共需请求多少次
         # 把请求进行组合
         request_code_dict = {}
         for i in range(ask_times):
@@ -280,19 +275,19 @@ class App:
 
 
 class Main_Window(PyQt5.QtWidgets.QMainWindow, gui.MainWindow.Ui_MainWindow):
-    change_status_text = PyQt5.QtCore.pyqtSignal(str)
-    add_list_widget_sh_item = PyQt5.QtCore.pyqtSignal(str)
-    add_list_widget_sz_item = PyQt5.QtCore.pyqtSignal(str)
+    change_status_text = PyQt5.QtCore.pyqtSignal(str)  # 信号——改变状态条文字
+    add_list_widget_sh_item = PyQt5.QtCore.pyqtSignal(str)  # 信号——增加上海表单元素
+    add_list_widget_sz_item = PyQt5.QtCore.pyqtSignal(str)  # 信号——增加深圳表单元素
 
     def init(self, gameData):
-        self.gameData = gameData
-        self.change_status_text.connect(self._set_status_bar_text)
-        self.add_list_widget_sh_item.connect(self._add_list_widget_sh)
-        self.add_list_widget_sz_item.connect(self._add_list_widget_sz)
-        self.listWidget_sh.itemClicked.connect(self._list_widget_sh_item_clicked)
-        self.listWidget_sz.itemClicked.connect(self._list_widget_sz_item_clicked)
-        self.pushButton_sh.released.connect(self._push_button_sh_buy_clicked)
-        self.pushButton_sz.released.connect(self._push_button_sz_buy_clicked)
+        self.gameData = gameData  # 传参
+        self.change_status_text.connect(self._set_status_bar_text)  # 连接——改变状态条文字
+        self.add_list_widget_sh_item.connect(self._add_list_widget_sh)  # 连接——增加上海表单元素
+        self.add_list_widget_sz_item.connect(self._add_list_widget_sz)  # 连接——增加深圳表单元素
+        self.listWidget_sh.itemClicked.connect(self._list_widget_sh_item_clicked)  # 连接——点击上海表单元素
+        self.listWidget_sz.itemClicked.connect(self._list_widget_sz_item_clicked)  # 连接——点击深圳表单元素
+        self.pushButton_sh.released.connect(self._push_button_sh_buy_clicked)  # 连接——买入上海股票
+        self.pushButton_sz.released.connect(self._push_button_sz_buy_clicked)  # 连接——买入深圳股票
 
     def set_status_bar_text(self, text):
         self.change_status_text.emit(text)

@@ -157,6 +157,7 @@ class Ui_MainWindow(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.label_own.sizePolicy().hasHeightForWidth())
         self.label_own.setSizePolicy(sizePolicy)
+        self.label_own.setText("")
         self.label_own.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
         self.label_own.setObjectName("label_own")
         self.gridLayout_8.addWidget(self.label_own, 0, 1, 1, 1)
@@ -257,7 +258,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Real Stock War"))
         self.group_accountName.setTitle(_translate("MainWindow", "账户名"))
         self.label_accountName.setText(_translate("MainWindow", "TextLabel"))
         self.group_total.setTitle(_translate("MainWindow", "总资产"))
@@ -270,7 +271,6 @@ class Ui_MainWindow(object):
         self.pushButton_sz.setText(_translate("MainWindow", "买入"))
         self.listWidget_sz.setSortingEnabled(True)
         self.tabWidget_stock.setTabText(self.tabWidget_stock.indexOf(self.tab_ShenzhengStock), _translate("MainWindow", "深圳"))
-        self.label_own.setText(_translate("MainWindow", "TextLabel"))
         self.pushButton_own.setText(_translate("MainWindow", "卖出"))
         self.tabWidget_stock.setTabText(self.tabWidget_stock.indexOf(self.tab_own), _translate("MainWindow", "持有"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_stock), _translate("MainWindow", "股票"))

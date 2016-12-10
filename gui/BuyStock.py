@@ -82,7 +82,7 @@ class Ui_BuyStock(object):
 
     def retranslateUi(self, BuyStock):
         _translate = QtCore.QCoreApplication.translate
-        BuyStock.setWindowTitle(_translate("BuyStock", "Form"))
+        BuyStock.setWindowTitle(_translate("BuyStock", "买入信息"))
         self.groupBox_stock_info.setTitle(_translate("BuyStock", "股票信息"))
         self.label_prefix.setText(_translate("BuyStock", "买入："))
         self.label_fix.setText(_translate("BuyStock", "支"))
