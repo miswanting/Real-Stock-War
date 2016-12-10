@@ -2,7 +2,6 @@
 *.log
 .idea
 *.html
-gui/_*
 __pycache__
 save
 cache
