@@ -15,6 +15,7 @@ import hashlib
 import glob
 import json
 import queue
+import pathlib
 
 import PyQt5
 
@@ -68,7 +69,6 @@ class App:
         self.start_star()
         self.fetch_current_data()
 
-
     def first_run(self):
         if not os.path.isdir('tmp'):
             os.mkdir('tmp')  # 用于外部代码资料储存
@@ -85,7 +85,79 @@ class App:
         pass
 
     def load_save(self):
-        pass
+        if glob.glob('save/*.save') == []:  # 判断——没有存档
+            print('当前没有存档，是否新建？[y]/n')
+            ans = input('>')
+            if ans == '' or ans == 'y' or ans == 'Y':  # 选择——是：新建存档
+                self.gameData['user'] = {}
+                while True:
+                    print('请输入用户名：')
+                    ans = input('>')
+                    if ans == '':
+                        print('用户名不能为空！')
+                    else:
+                        self.gameData['user']['name'] = ans
+                        break
+                while True:
+                    print('请选择游戏模式：')
+                    print('1：规定时间谁多谁嬴。')
+                    print('2：规定金额谁快谁嬴。')
+                    ans = input('>')
+                    if ans == '1':
+                        self.gameData['user']['mode'] = 'settime'
+                        break
+                    elif ans == '2':
+                        self.gameData['user']['mode'] = 'setmoney'
+                        break
+                    else:
+                        print('请输入[1-2]的数字！')
+                while True:
+                    print('请选择难度：')
+                    print('1：简单。起始资金多。')
+                    print('2：普通。起始资金中。')
+                    print('3：困难。起始资金少。')
+                    ans = input('>')
+                    if ans == '1':
+                        self.gameData['user']['difficulty'] = 1
+                        break
+                    elif ans == '2':
+                        self.gameData['user']['difficulty'] = 2
+                        break
+                    elif ans == '3':
+                        self.gameData['user']['difficulty'] = 3
+                        break
+                    else:
+                        print('请输入[1-3]的数字！')
+                with open('save/{}.save'.format(self.gameData['user']['name']), 'w') as save_file:
+                    save_file.write(json.dumps(self.gameData['user']))
+            else:  # 选择——放弃
+                pass
+        else:  # 判断——有存档
+            if len(glob.glob('save/*.save')) == 1:  # 判断——单文件：直接加载
+                with open(glob.glob('save/*.save')[0], 'r')as save_file:
+                    data = save_file.read()
+                    self.gameData['user'] = json.loads(data)
+            else:  # 判断——多文件：列出后选择
+                text = '{}：{}'
+                while True:
+                    num = 1
+                    print('检测到多个存档文件，请选择一个以加载：')
+                    for file in glob.glob('save/*.save'):
+                        print(text.format(num, pathlib.PurePath(file).stem))
+                        num += 1
+                    ans = input('>')
+                    if ans.isdigit():  # 判断——输入正常：检查是否在范围内
+                        ans = int(ans)
+                        if ans > 0 and ans < num:  # 判断——在范围内
+                            ans -= 1
+                            with open(glob.glob('save/*.save')[ans], 'r')as save_file:
+                                data = save_file.read()
+                                self.gameData['user'] = json.loads(data)
+                            print(self.gameData['user'])
+                        else:  # 判断——不在范围内
+                            print('不存在该选项！')
+                    else:  # 判断——输入非法
+                        print('请输入数字！')
 
     def load_cache(self):
         pass

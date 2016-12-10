@@ -3,4 +3,5 @@
 .idea
 *.html
 gui/_*
-_*
+__pycache__/
+save/
