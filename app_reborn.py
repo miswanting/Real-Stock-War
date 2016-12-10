@@ -18,6 +18,7 @@ import json
 import PyQt5
 
 import gui.MainWindow
+import gui.BuyStock
 
 spacial_char = '↑↓←→↖↙↗↘↕'
 
@@ -56,8 +57,9 @@ class App:
 
         self.firstRun()
         self.load_config()
-        self.load_user()
+        self.load_save()
         self.load_cache()
+        self.load_ai()
         self.show_gui()
         self.show_cache()
         self.fetch_data()
@@ -81,10 +83,13 @@ class App:
     def load_config(self):
         pass
 
-    def load_user(self):
+    def load_save(self):
         pass
 
     def load_cache(self):
+        pass
+
+    def load_ai(self):
         pass
 
     def show_gui(self):
@@ -131,6 +136,9 @@ class App:
                 if 'ui' in dir(self):
                     self.ui.set_status_bar_text('上海：{}；深圳：{}。'.format(self.shStatus, self.szStatus))
                 time.sleep(0.1)
+
+        def api(self, cmd):
+            pass
 
         def fetchDaPanData():
             """查询大盘信息"""
@@ -283,8 +291,8 @@ class Main_Window(PyQt5.QtWidgets.QMainWindow, gui.MainWindow.Ui_MainWindow):
         self.add_list_widget_sz_item.connect(self._add_list_widget_sz)
         self.listWidget_sh.itemClicked.connect(self._list_widget_sh_item_clicked)
         self.listWidget_sz.itemClicked.connect(self._list_widget_sz_item_clicked)
-        self.pushButton_sh.released.connect(self._push_button_sh_clicked)
-        self.pushButton_sz.released.connect(self._push_button_sz_clicked)
+        self.pushButton_sh.released.connect(self._push_button_sh_buy_clicked)
+        self.pushButton_sz.released.connect(self._push_button_sz_buy_clicked)
 
     def set_status_bar_text(self, text):
         self.change_status_text.emit(text)
@@ -338,11 +346,20 @@ class Main_Window(PyQt5.QtWidgets.QMainWindow, gui.MainWindow.Ui_MainWindow):
                 self.label_sz.setText(tmp)
                 break
 
-    def _push_button_sh_clicked(self):
-        print(self.listWidget_sh.currentItem().text())
+    def _push_button_sh_buy_clicked(self):
+        # app = PyQt5.QtWidgets.QApplication(sys.argv)
+        BuyStock = PyQt5.QtWidgets.QWidget()
+        ui = Ui_BuyStock()
+        ui.setupUi(BuyStock)
+        BuyStock.show()
+        # sys.exit(app.exec_())
 
-    def _push_button_sz_clicked(self):
+    def _push_button_sz_buy_clicked(self):
         print(self.listWidget_sz.currentItem().text())
+
+
+class Ui_BuyStock(PyQt5.QtWidgets.QWidget, gui.BuyStock.Ui_BuyStock):
+    pass
 
 
 if __name__ == '__main__':
