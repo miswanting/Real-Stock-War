@@ -347,19 +347,25 @@ class Main_Window(PyQt5.QtWidgets.QMainWindow, gui.MainWindow.Ui_MainWindow):
                 break
 
     def _push_button_sh_buy_clicked(self):
-        # app = PyQt5.QtWidgets.QApplication(sys.argv)
-        BuyStock = PyQt5.QtWidgets.QWidget()
-        ui = Ui_BuyStock()
-        ui.setupUi(BuyStock)
-        BuyStock.show()
-        # sys.exit(app.exec_())
+        def show():
+            app = PyQt5.QtWidgets.QApplication(sys.argv)
+            BuyStock = PyQt5.QtWidgets.QWidget()
+            ui = Ui_BuyStock()
+            ui.setupUi(BuyStock)
+            ui.init(self.gameData)
+            BuyStock.show()
+            sys.exit(app.exec_())
+
+        t_widget_sh_buy = threading.Thread(target=show)
+        t_widget_sh_buy.start()
 
     def _push_button_sz_buy_clicked(self):
         print(self.listWidget_sz.currentItem().text())
 
 
 class Ui_BuyStock(PyQt5.QtWidgets.QWidget, gui.BuyStock.Ui_BuyStock):
-    pass
+    def init(self, gameData):
+        self.gameData = gameData
 
 
 if __name__ == '__main__':
