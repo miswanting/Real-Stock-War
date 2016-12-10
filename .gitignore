@@ -6,3 +6,6 @@ gui/_*
 __pycache__
 save
 cache
+#
+_
+*.spec
