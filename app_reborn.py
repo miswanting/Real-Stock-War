@@ -119,12 +119,15 @@ class App:
                     ans = input('>')
                     if ans == '1':
                         self.userData['difficulty'] = 1
+                        self.userData['current_money'] = 1000000
                         break
                     elif ans == '2':
                         self.userData['difficulty'] = 2
+                        self.userData['current_money'] = 500000
                         break
                     elif ans == '3':
                         self.userData['difficulty'] = 3
+                        self.userData['current_money'] = 200000
                         break
                     else:
                         print('请输入[1-3]的数字！')
@@ -173,7 +176,7 @@ class App:
             main_window = PyQt5.QtWidgets.QMainWindow()
             self.ui = Main_Window()
             self.ui.setupUi(main_window)
-            self.ui.init(self.gameData)
+            self.ui.init(self.gameData, self.userData)
             main_window.show()
             sys.exit(app.exec_())
 
@@ -384,8 +387,9 @@ class Main_Window(PyQt5.QtWidgets.QMainWindow, gui.MainWindow.Ui_MainWindow):
     add_list_widget_sh_item = PyQt5.QtCore.pyqtSignal(str)  # 信号——增加上海表单元素
     add_list_widget_sz_item = PyQt5.QtCore.pyqtSignal(str)  # 信号——增加深圳表单元素
 
-    def init(self, gameData):
+    def init(self, gameData, userData):
         self.gameData = gameData  # 传参
+        self.userData = userData  # 传参
         self.change_status_text.connect(self._set_status_bar_text)  # 连接——改变状态条文字
         self.add_list_widget_sh_item.connect(self._add_list_widget_sh)  # 连接——增加上海表单元素
         self.add_list_widget_sz_item.connect(self._add_list_widget_sz)  # 连接——增加深圳表单元素
