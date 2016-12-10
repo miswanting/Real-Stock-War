@@ -58,6 +58,7 @@ class App:
                             format='%(relativeCreated)d[%(levelname).4s][%(threadName)-.10s]%(message)s')
 
         self.gameData = {}
+        self.userData = {}
 
         self.first_run()
         self.load_config()
@@ -89,14 +90,13 @@ class App:
             print('当前没有存档，是否新建？[y]/n')
             ans = input('>')
             if ans == '' or ans == 'y' or ans == 'Y':  # 选择——是：新建存档
-                self.gameData['user'] = {}
                 while True:
                     print('请输入用户名：')
                     ans = input('>')
                     if ans == '':
                         print('用户名不能为空！')
                     else:
-                        self.gameData['user']['name'] = ans
+                        self.userData['name'] = ans
                         break
                 while True:
                     print('请选择游戏模式：')
@@ -104,10 +104,10 @@ class App:
                     print('2：规定金额谁快谁嬴。')
                     ans = input('>')
                     if ans == '1':
-                        self.gameData['user']['mode'] = 'settime'
+                        self.userData['mode'] = 'settime'
                         break
                     elif ans == '2':
-                        self.gameData['user']['mode'] = 'setmoney'
+                        self.userData['mode'] = 'setmoney'
                         break
                     else:
                         print('请输入[1-2]的数字！')
@@ -118,25 +118,25 @@ class App:
                     print('3：困难。起始资金少。')
                     ans = input('>')
                     if ans == '1':
-                        self.gameData['user']['difficulty'] = 1
+                        self.userData['difficulty'] = 1
                         break
                     elif ans == '2':
-                        self.gameData['user']['difficulty'] = 2
+                        self.userData['difficulty'] = 2
                         break
                     elif ans == '3':
-                        self.gameData['user']['difficulty'] = 3
+                        self.userData['difficulty'] = 3
                         break
                     else:
                         print('请输入[1-3]的数字！')
-                with open('save/{}.save'.format(self.gameData['user']['name']), 'w') as save_file:
-                    save_file.write(json.dumps(self.gameData['user']))
+                with open('save/{}.save'.format(self.userData['name']), 'w') as save_file:
+                    save_file.write(json.dumps(self.userData))
             else:  # 选择——放弃
                 pass
         else:  # 判断——有存档
             if len(glob.glob('save/*.save')) == 1:  # 判断——单文件：直接加载
                 with open(glob.glob('save/*.save')[0], 'r')as save_file:
                     data = save_file.read()
-                    self.gameData['user'] = json.loads(data)
+                    self.userData = json.loads(data)
             else:  # 判断——多文件：列出后选择
                 text = '{}：{}'
                 while True:
@@ -152,8 +152,8 @@ class App:
                             ans -= 1
                             with open(glob.glob('save/*.save')[ans], 'r')as save_file:
                                 data = save_file.read()
-                                self.gameData['user'] = json.loads(data)
-                            print(self.gameData['user'])
+                                self.userData = json.loads(data)
+                            break
                         else:  # 判断——不在范围内
                             print('不存在该选项！')
                     else:  # 判断——输入非法
