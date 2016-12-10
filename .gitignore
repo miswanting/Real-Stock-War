@@ -1,10 +1,6 @@
 .csv
 *.log
 .idea
-dist/tmp/*
-dist/storage/*
-dist/save/*
-dist/log/*
-dist/_*
 *.html
 gui/_*
+_*

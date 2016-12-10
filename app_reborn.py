@@ -14,6 +14,7 @@ import os
 import hashlib
 import glob
 import json
+import queue
 
 import PyQt5
 
@@ -48,6 +49,8 @@ class App:
     handler = urllib.request.HTTPCookieProcessor(cookie)
     opener = urllib.request.build_opener(handler)
 
+    taskQueue = queue.Queue()
+
     def __init__(self):
 
         logging.basicConfig(filename='app.log', level=logging.DEBUG, filemode='w',
@@ -55,16 +58,18 @@ class App:
 
         self.gameData = {}
 
-        self.firstRun()
+        self.first_run()
         self.load_config()
         self.load_save()
         self.load_cache()
         self.load_ai()
         self.show_gui()
         self.show_cache()
-        self.fetch_data()
+        self.start_star()
+        self.fetch_current_data()
 
-    def firstRun(self):
+
+    def first_run(self):
         if not os.path.isdir('tmp'):
             os.mkdir('tmp')  # 用于外部代码资料储存
         if not os.path.isdir('save'):
@@ -104,15 +109,16 @@ class App:
     def show_cache(self):
         pass
 
-    def fetch_data(self):
-        # 根据游戏内容，综合当前网络速度与延迟，拟决定用10个线程处理以下任务：
-        # 以下任务同时进行：
-        def Star():
+    def start_star(self):
+        def star():
             """伴飞卫星"""
             self.isRunning['Star'] = True
             shStatus = ''
             szStatus = ''
             while self.isRunning['Star']:
+                if self.taskQueue.qsize() > 0:
+                    task = self.taskQueue.get_nowait()
+
                 if 'stockCode_sh' in self.gameData:
                     self.shStatus = '正在获取信息：{:.2f}%'
                     if 'new_data_sh' in self.gameData:
@@ -133,9 +139,12 @@ class App:
                     self.ui.set_status_bar_text('上海：{}；深圳：{}。'.format(self.shStatus, self.szStatus))
                 time.sleep(0.1)
 
-        def api(self, cmd):
-            pass
+        t_star = threading.Thread(target=star)
+        t_star.start()
 
+    def fetch_current_data(self):
+        # 根据游戏内容，综合当前网络速度与延迟，拟决定用10个线程处理以下任务：
+        # 以下任务同时进行：
         def fetchDaPanData():
             """查询大盘信息"""
             self.isRunning['fetchDaPanData'] = True
@@ -205,16 +214,17 @@ class App:
             for each in self.gameData['new_data_sz'].keys():
                 self.ui.add_list_widget_sz(self.gameData['new_data_sz'][each][0])
 
-        star = threading.Thread(target=Star)
         dapan = threading.Thread(target=fetchDaPanData)
         stockCode = threading.Thread(target=fetchStockCode)
         shStock = threading.Thread(target=fetchSHStock)
         szStock = threading.Thread(target=fetchSZStock)
-        star.start()
         dapan.start()
         stockCode.start()
         shStock.start()
         szStock.start()
+
+    def api(self, cmd):
+        pass
 
     def api_get_sinajs(self, time, codeList):
         """
