@@ -75,8 +75,8 @@ class App:
             os.mkdir('tmp')  # 用于外部代码资料储存
         if not os.path.isdir('save'):
             os.mkdir('save')  # 用于存档
-        if not os.path.isdir('data'):
-            os.mkdir('data')  # 用于内部代码资料储存
+        if not os.path.isdir('cache'):
+            os.mkdir('cache')  # 用于内部代码资料储存
         if not os.path.isdir('ai'):
             os.mkdir('ai')  # 用于储存外部AI脚本
         for file in glob.glob('tmp/*'):
@@ -160,7 +160,9 @@ class App:
                         print('请输入数字！')
 
     def load_cache(self):
-        pass
+        if os.path.isfile('cache/game.cache'):  # 判断——缓存文件存在：加载
+            with open('cache/game.cache', 'r')as cache_file:
+                self.gameData = json.loads(cache_file.read())
 
     def load_ai(self):
         pass
@@ -179,7 +181,22 @@ class App:
         t_gui.start()
 
     def show_cache(self):
-        pass
+        if 'new_data_sh' in self.gameData:
+            while True:  # 解决异步
+                if 'ui' in dir(self):
+                    for each in self.gameData['new_data_sh'].keys():
+                        self.ui.add_list_widget_sh(self.gameData['new_data_sh'][each][0])
+                    break
+                else:
+                    time.sleep(0.1)
+        if 'new_data_sz' in self.gameData:
+            while True:  # 解决异步
+                if 'ui' in dir(self):
+                    for each in self.gameData['new_data_sz'].keys():
+                        self.ui.add_list_widget_sz(self.gameData['new_data_sz'][each][0])
+                    break
+                else:
+                    time.sleep(0.1)
 
     def start_star(self):
         def star():
@@ -245,6 +262,8 @@ class App:
                     self.gameData['stockCode_sh'] = re.findall(pattern, str(soup.find_all('ul')[7]))
                     self.gameData['stockCode_sz'] = re.findall(pattern, str(soup.find_all('ul')[8]))
                     self.isRunning['fetchStockCode'] = False
+                    with open('cache/game.cache', 'w') as cache_file:
+                        cache_file.write(json.dumps(self.gameData))
                 except Exception as e:
                     logging.debug('fetchStockCode崩溃')
 
@@ -264,6 +283,8 @@ class App:
                         newList.append('sh' + each[1])
                     self.gameData['new_data_sh'] = self.api_get_sinajs(get_current_time(), newList)
                     self.isRunning['fetchSHStock'] = False
+                    with open('cache/game.cache', 'w') as cache_file:
+                        cache_file.write(json.dumps(self.gameData))
             for each in self.gameData['new_data_sh'].keys():
                 self.ui.add_list_widget_sh(self.gameData['new_data_sh'][each][0])
 
@@ -283,6 +304,8 @@ class App:
                         newList.append('sz' + each[1])
                     self.gameData['new_data_sz'] = self.api_get_sinajs(get_current_time(), newList)
                     self.isRunning['fetchSZStock'] = False
+                    with open('cache/game.cache', 'w') as cache_file:
+                        cache_file.write(json.dumps(self.gameData))
             for each in self.gameData['new_data_sz'].keys():
                 self.ui.add_list_widget_sz(self.gameData['new_data_sz'][each][0])
 
