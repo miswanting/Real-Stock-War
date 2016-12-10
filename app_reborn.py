@@ -21,6 +21,7 @@ import PyQt5
 
 import gui.MainWindow
 import gui.BuyStock
+import gui.SellStock
 
 spacial_char = '↑↓←→↖↙↗↘↕'
 
@@ -59,6 +60,7 @@ class App:
 
         self.gameData = {}
         self.userData = {}
+        self.userData['own_stock'] = {}
 
         self.first_run()
         self.load_config()
@@ -397,6 +399,21 @@ class Main_Window(PyQt5.QtWidgets.QMainWindow, gui.MainWindow.Ui_MainWindow):
         self.listWidget_sz.itemClicked.connect(self._list_widget_sz_item_clicked)  # 连接——点击深圳表单元素
         self.pushButton_sh.released.connect(self._push_button_sh_buy_clicked)  # 连接——买入上海股票
         self.pushButton_sz.released.connect(self._push_button_sz_buy_clicked)  # 连接——买入深圳股票
+        self.pushButton_own.released.connect(self._push_button_own_sell_clicked)  # 连接——卖出股票
+        self._ui_sh_buy = Ui_BuyStock()  # 买上海股票ui
+        self._ui_sz_buy = Ui_BuyStock()  # 买深圳股票ui
+        self._ui_own_sell = Ui_SellStock()  # 卖股票ui
+        self._item_sh_selected = None
+        self._item_sz_selected = None
+        self._item_sell_selected = None
+
+        def star():
+            while True:
+                self.label_totalAmount.setText('{:.2f}'.format(self.userData['current_money']))
+                time.sleep(1)
+
+        t_star = threading.Thread(target=star)
+        t_star.start()
 
     def set_status_bar_text(self, text):
         self.change_status_text.emit(text)
@@ -421,10 +438,9 @@ class Main_Window(PyQt5.QtWidgets.QMainWindow, gui.MainWindow.Ui_MainWindow):
         self.listWidget_sz.addItem(item)
 
     def _list_widget_sh_item_clicked(self, item):
-        print(item.text())
         for each in self.gameData['new_data_sh'].keys():
             if self.gameData['new_data_sh'][each][0] == item.text():
-                newList = self.gameData['new_data_sh'][each]
+                newList = list(self.gameData['new_data_sh'][each])
                 newList[0] = '名称：' + newList[0]
                 newList[1] = '今开：' + newList[1]
                 newList[2] = '昨收：' + newList[2]
@@ -433,13 +449,14 @@ class Main_Window(PyQt5.QtWidgets.QMainWindow, gui.MainWindow.Ui_MainWindow):
                 newList[5] = '最低：' + newList[5]
                 tmp = '\n'.join(newList[:6])
                 self.label_sh.setText(tmp)
+                self._item_sh_selected = each
                 break
+        self._item_sh_selected = each
 
     def _list_widget_sz_item_clicked(self, item):
-        print(item.text())
         for each in self.gameData['new_data_sz'].keys():
             if self.gameData['new_data_sz'][each][0] == item.text():
-                newList = self.gameData['new_data_sz'][each]
+                newList = list(self.gameData['new_data_sz'][each])
                 newList[0] = '名称：' + newList[0]
                 newList[1] = '今开：' + newList[1]
                 newList[2] = '昨收：' + newList[2]
@@ -448,28 +465,134 @@ class Main_Window(PyQt5.QtWidgets.QMainWindow, gui.MainWindow.Ui_MainWindow):
                 newList[5] = '最低：' + newList[5]
                 tmp = '\n'.join(newList[:6])
                 self.label_sz.setText(tmp)
+                self._item_sz_selected = each
                 break
 
     def _push_button_sh_buy_clicked(self):
-        def show():
-            app = PyQt5.QtWidgets.QApplication(sys.argv)
-            BuyStock = PyQt5.QtWidgets.QWidget()
-            ui = Ui_BuyStock()
-            ui.setupUi(BuyStock)
-            ui.init(self.gameData)
-            BuyStock.show()
-            sys.exit(app.exec_())
-
-        t_widget_sh_buy = threading.Thread(target=show)
-        t_widget_sh_buy.start()
+        self._ui_sh_buy.init(self.gameData, self.userData, self._item_sh_selected)
+        self._ui_sh_buy.show()
 
     def _push_button_sz_buy_clicked(self):
-        print(self.listWidget_sz.currentItem().text())
+        self._ui_sz_buy.init(self.gameData, self.userData, self._item_sz_selected)
+        self._ui_sz_buy.show()
+
+    def _push_button_own_sell_clicked(self):
+        self._ui_own_sell.init(self.gameData, self.userData, self._item_sell_selected)
+        self._ui_own_sell.show()
 
 
 class Ui_BuyStock(PyQt5.QtWidgets.QWidget, gui.BuyStock.Ui_BuyStock):
-    def init(self, gameData):
+    def __init__(self):
+        super(Ui_BuyStock, self).__init__()
+        self.setupUi(self)
+
+    def init(self, gameData, userData, selected_item_code):
         self.gameData = gameData
+        self.userData = userData  # 传参
+        self.selected_item_code = selected_item_code
+        self.spinBox_buy_amount.valueChanged.connect(self._change_account_info)
+        self.pushButton_buy.released.connect(self._push_button_buy_clicked)  # 连接——买入上海股票
+        self.pushButton_cancel.released.connect(self._push_button_cancel_clicked)  # 连接——买入深圳股票
+
+        newList = list(self.gameData['new_data_' + self.selected_item_code[:2]][self.selected_item_code])
+        newList[0] = '名称：' + newList[0]
+        newList[1] = '今开：' + newList[1]
+        newList[2] = '昨收：' + newList[2]
+        newList[3] = '当前：' + newList[3]
+        newList[4] = '最高：' + newList[4]
+        newList[5] = '最低：' + newList[5]
+        tmp = '\n'.join(newList[:6])
+        self.label_stock_info.setText(tmp)
+        newList = []
+        newList.append('资金：{:.2f}'.format(self.userData['current_money']))
+        tmp = self.gameData['new_data_' + self.selected_item_code[:2]][self.selected_item_code][3]
+        tmp = float(tmp)
+        newList.append('支出：{:.2f}'.format(tmp * self.spinBox_buy_amount.value()))
+        newList.append('结余：{:.2f}'.format(self.userData['current_money'] - tmp * self.spinBox_buy_amount.value()))
+        tmp = '\n'.join(newList)
+        self.label_account_info.setText(tmp)
+
+    def _change_account_info(self, value):
+        newList = []
+        newList.append('资金：{:.2f}'.format(self.userData['current_money']))
+        tmp = self.gameData['new_data_' + self.selected_item_code[:2]][self.selected_item_code][3]
+        tmp = float(tmp)
+        newList.append('支出：{:.2f}'.format(tmp * self.spinBox_buy_amount.value()))
+        newList.append('结余：{:.2f}'.format(self.userData['current_money'] - tmp * self.spinBox_buy_amount.value()))
+        tmp = '\n'.join(newList)
+        self.label_account_info.setText(tmp)
+
+    def _push_button_buy_clicked(self):
+        tmp = self.gameData['new_data_' + self.selected_item_code[:2]][self.selected_item_code][3]
+        tmp = float(tmp)
+        self.userData['current_money'] = self.userData['current_money'] - tmp * self.spinBox_buy_amount.value()
+        print(self.userData)
+        if self.selected_item_code in self.userData['own_stock'].keys():
+            self.userData['own_stock'][self.selected_item_code] += self.spinBox_buy_amount.value()
+        else:
+            self.userData['own_stock'][self.selected_item_code] = self.spinBox_buy_amount.value()
+        self._push_button_cancel_clicked()
+
+    def _push_button_cancel_clicked(self):
+        self.close()
+
+
+class Ui_SellStock(PyQt5.QtWidgets.QWidget, gui.BuyStock.Ui_BuyStock):
+    def __init__(self):
+        super(Ui_SellStock, self).__init__()
+        self.setupUi(self)
+
+    def init(self, gameData, userData, selected_item_code):
+        self.gameData = gameData
+        self.userData = userData  # 传参
+        self.selected_item_code = selected_item_code
+        self.spinBox_sell_amount.valueChanged.connect(self._change_account_info)
+        self.pushButton_sell.released.connect(self._push_button_sell_clicked)  # 连接——买入上海股票
+        self.pushButton_cancel.released.connect(self._push_button_cancel_clicked)  # 连接——买入深圳股票
+
+        newList = list(self.gameData['new_data_' + self.selected_item_code[:2]][self.selected_item_code])
+        newList[0] = '名称：' + newList[0]
+        newList[1] = '今开：' + newList[1]
+        newList[2] = '昨收：' + newList[2]
+        newList[3] = '当前：' + newList[3]
+        newList[4] = '最高：' + newList[4]
+        newList[5] = '最低：' + newList[5]
+        newList[6] = '拥有：' + userData['own_stock'][selected_item_code]
+        tmp = '\n'.join(newList[:7])
+        self.label_stock_info.setText(tmp)
+        newList = []
+        newList.append('资金：{:.2f}'.format(self.userData['current_money']))
+        tmp = self.gameData['new_data_' + self.selected_item_code[:2]][self.selected_item_code][3]
+        tmp = float(tmp)
+        newList.append('收入：{:.2f}'.format(tmp * self.spinBox_buy_amount.value()))
+        newList.append('结余：{:.2f}'.format(self.userData['current_money'] + tmp * self.spinBox_buy_amount.value()))
+        tmp = '\n'.join(newList)
+        self.label_account_info.setText(tmp)
+
+    def _change_account_info(self, value):
+        newList = []
+        newList.append('资金：{:.2f}'.format(self.userData['current_money']))
+        tmp = self.gameData['new_data_' + self.selected_item_code[:2]][self.selected_item_code][3]
+        tmp = float(tmp)
+        newList.append('收入：{:.2f}'.format(tmp * self.spinBox_buy_amount.value()))
+        newList.append('结余：{:.2f}'.format(self.userData['current_money'] + tmp * self.spinBox_buy_amount.value()))
+        tmp = '\n'.join(newList)
+        self.label_account_info.setText(tmp)
+
+    def _push_button_sell_clicked(self):
+        tmp = self.gameData['new_data_' + self.selected_item_code[:2]][self.selected_item_code][3]
+        tmp = float(tmp)
+        self.userData['current_money'] = self.userData['current_money'] + tmp * self.spinBox_buy_amount.value()
+        print(self.userData)
+        if self.selected_item_code in self.userData['own_stock'].keys():
+            self.userData['own_stock'][self.selected_item_code] -= self.spinBox_buy_amount.value()
+        if self.userData['own_stock'][self.selected_item_code] == 0:
+            del self.userData['own_stock'][self.selected_item_code]
+        self._push_button_cancel_clicked()
+
+
+def _push_button_cancel_clicked(self):
+    self.close()
 
 
 if __name__ == '__main__':
