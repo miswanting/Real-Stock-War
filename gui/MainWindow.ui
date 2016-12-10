@@ -156,7 +156,7 @@
           <property name="currentIndex">
            <number>0</number>
           </property>
-          <widget class="QWidget" name="tab_ShanghaiStock">
+          <widget class="QWidget" name="tab_sh_stock">
            <attribute name="title">
             <string>上海</string>
            </attribute>
@@ -212,7 +212,7 @@
             </item>
            </layout>
           </widget>
-          <widget class="QWidget" name="tab_ShenzhengStock">
+          <widget class="QWidget" name="tab_sz_stock">
            <attribute name="title">
             <string>深圳</string>
            </attribute>
@@ -268,7 +268,7 @@
             </item>
            </layout>
           </widget>
-          <widget class="QWidget" name="tab_own">
+          <widget class="QWidget" name="tab_own_stock">
            <attribute name="title">
             <string>持有</string>
            </attribute>
