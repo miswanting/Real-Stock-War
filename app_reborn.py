@@ -202,6 +202,16 @@ class App:
                     break
                 else:
                     time.sleep(0.1)
+        if 'own_stock' in self.userData:
+            while True:  # 解决异步
+                if 'ui' in dir(self):
+                    newList=[]
+                    for each in self.userData['own_stock']:
+                        newList.append([each][0])
+                    self.ui.clean_set_list_widget_own(newList)
+                    break
+                else:
+                    time.sleep(0.1)
 
     def start_star(self):
         def star():
@@ -290,8 +300,10 @@ class App:
                     self.isRunning['fetchSHStock'] = False
                     with open('cache/game.cache', 'w') as cache_file:
                         cache_file.write(json.dumps(self.gameData))
+            newList = []
             for each in self.gameData['new_data_sh'].keys():
-                self.ui.add_list_widget_sh(self.gameData['new_data_sh'][each][0])
+                newList.append(self.gameData['new_data_sh'][each][0])
+            self.ui.clean_set_list_widget_sh(newList)
 
         def fetchSZStock():
             """用已保存的股票代码查询深证成份股票当前信息"""
@@ -311,8 +323,10 @@ class App:
                     self.isRunning['fetchSZStock'] = False
                     with open('cache/game.cache', 'w') as cache_file:
                         cache_file.write(json.dumps(self.gameData))
+            newList = []
             for each in self.gameData['new_data_sz'].keys():
-                self.ui.add_list_widget_sz(self.gameData['new_data_sz'][each][0])
+                newList.append(self.gameData['new_data_sz'][each][0])
+            self.ui.clean_set_list_widget_sz(newList)
 
         dapan = threading.Thread(target=fetchDaPanData)
         stockCode = threading.Thread(target=fetchStockCode)
@@ -386,15 +400,27 @@ class App:
 
 class Main_Window(PyQt5.QtWidgets.QMainWindow, gui.MainWindow.Ui_MainWindow):
     change_status_text = PyQt5.QtCore.pyqtSignal(str)  # 信号——改变状态条文字
+
     add_list_widget_sh_item = PyQt5.QtCore.pyqtSignal(str)  # 信号——增加上海表单元素
+    clean_set_list_widget_sh_item = PyQt5.QtCore.pyqtSignal(list)  # 信号——增加上海表单元素
     add_list_widget_sz_item = PyQt5.QtCore.pyqtSignal(str)  # 信号——增加深圳表单元素
+    clean_set_list_widget_sz_item = PyQt5.QtCore.pyqtSignal(list)  # 信号——增加深圳表单元素
+    add_list_widget_own_item = PyQt5.QtCore.pyqtSignal(str)  # 信号——增加持有表单元素
+    clean_set_list_widget_own_item = PyQt5.QtCore.pyqtSignal(list)  # 信号——增加持有表单元素
 
     def init(self, gameData, userData):
         self.gameData = gameData  # 传参
         self.userData = userData  # 传参
+
         self.change_status_text.connect(self._set_status_bar_text)  # 连接——改变状态条文字
+
         self.add_list_widget_sh_item.connect(self._add_list_widget_sh)  # 连接——增加上海表单元素
+        self.clean_set_list_widget_sh_item.connect(self._clean_set_list_widget_sh)  # 连接——删除并增加上海表单元素
         self.add_list_widget_sz_item.connect(self._add_list_widget_sz)  # 连接——增加深圳表单元素
+        self.clean_set_list_widget_sz_item.connect(self._clean_set_list_widget_sz)  # 连接——删除并增加深圳表单元素
+        self.add_list_widget_own_item.connect(self._add_list_widget_own)  # 连接——增加持有表单元素
+        self.clean_set_list_widget_own_item.connect(self._clean_set_list_widget_own)  # 连接——删除并增加持有表单元素
+
         self.listWidget_sh.itemClicked.connect(self._list_widget_sh_item_clicked)  # 连接——点击上海表单元素
         self.listWidget_sz.itemClicked.connect(self._list_widget_sz_item_clicked)  # 连接——点击深圳表单元素
         self.pushButton_sh.released.connect(self._push_button_sh_buy_clicked)  # 连接——买入上海股票
@@ -421,6 +447,14 @@ class Main_Window(PyQt5.QtWidgets.QMainWindow, gui.MainWindow.Ui_MainWindow):
     def _set_status_bar_text(self, text):
         self.statusbar.showMessage(text)
 
+    def clean_set_list_widget_sh(self, item_list):
+        self.clean_set_list_widget_sh_item.emit(item_list)
+
+    def _clean_set_list_widget_sh(self, item_list):
+        self.listWidget_sh.clear()
+        for each in item_list:
+            self.add_list_widget_sh_item.emit(each)
+
     def add_list_widget_sh(self, text):
         self.add_list_widget_sh_item.emit(text)
 
@@ -429,6 +463,14 @@ class Main_Window(PyQt5.QtWidgets.QMainWindow, gui.MainWindow.Ui_MainWindow):
         item.setText(text)
         self.listWidget_sh.addItem(item)
 
+    def clean_set_list_widget_sz(self, item_list):
+        self.clean_set_list_widget_sz_item.emit(item_list)
+
+    def _clean_set_list_widget_sz(self, item_list):
+        self.listWidget_sz.clear()
+        for each in item_list:
+            self.add_list_widget_sz_item.emit(each)
+
     def add_list_widget_sz(self, text):
         self.add_list_widget_sz_item.emit(text)
 
@@ -436,6 +478,22 @@ class Main_Window(PyQt5.QtWidgets.QMainWindow, gui.MainWindow.Ui_MainWindow):
         item = PyQt5.QtWidgets.QListWidgetItem()
         item.setText(text)
         self.listWidget_sz.addItem(item)
+
+    def clean_set_list_widget_own(self, item_list):
+        self.clean_set_list_widget_own_item.emit(item_list)
+
+    def _clean_set_list_widget_own(self, item_list):
+        self.listWidget_own.clear()
+        for each in item_list:
+            self.add_list_widget_own_item.emit(each)
+
+    def add_list_widget_own(self, text):
+        self.add_list_widget_own_item.emit(text)
+
+    def _add_list_widget_own(self, text):
+        item = PyQt5.QtWidgets.QListWidgetItem()
+        item.setText(text)
+        self.listWidget_own.addItem(item)
 
     def _list_widget_sh_item_clicked(self, item):
         for each in self.gameData['new_data_sh'].keys():
@@ -526,7 +584,6 @@ class Ui_BuyStock(PyQt5.QtWidgets.QWidget, gui.BuyStock.Ui_BuyStock):
         tmp = self.gameData['new_data_' + self.selected_item_code[:2]][self.selected_item_code][3]
         tmp = float(tmp)
         self.userData['current_money'] = self.userData['current_money'] - tmp * self.spinBox_buy_amount.value()
-        print(self.userData)
         if self.selected_item_code in self.userData['own_stock'].keys():
             self.userData['own_stock'][self.selected_item_code] += self.spinBox_buy_amount.value()
         else:
@@ -583,7 +640,6 @@ class Ui_SellStock(PyQt5.QtWidgets.QWidget, gui.BuyStock.Ui_BuyStock):
         tmp = self.gameData['new_data_' + self.selected_item_code[:2]][self.selected_item_code][3]
         tmp = float(tmp)
         self.userData['current_money'] = self.userData['current_money'] + tmp * self.spinBox_buy_amount.value()
-        print(self.userData)
         if self.selected_item_code in self.userData['own_stock'].keys():
             self.userData['own_stock'][self.selected_item_code] -= self.spinBox_buy_amount.value()
         if self.userData['own_stock'][self.selected_item_code] == 0:
