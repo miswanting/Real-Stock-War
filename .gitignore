@@ -8,3 +8,4 @@ cache
 *.bat
 _*
 *.spec
+.vscode
