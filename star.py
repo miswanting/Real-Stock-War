@@ -22,14 +22,31 @@ class Star:
 
     def start(self):
         # 分析任务
-        if mission[0] == 'get':
-            pass
-
-        # 读取存档
-
-        # 载入AI
-
-        # 恢复缓存
+        if self.mission[0] == 'get':
+            if self.mission[1] == ['StockCode']:
+                while True:
+                    try:
+                        # 构建请求
+                        request = urllib.request.Request(url_stock_code)
+                        # 获取响应
+                        response = self.opener.open(
+                            request, timeout=self.timeout)
+                        # 解码
+                        stockList = response.read().decode('gbk')
+                        soup = bs4.BeautifulSoup(stockList, 'lxml')
+                        pattern = re.compile('">(.*?)\((.*?)\)<')
+                        self.gameData['stockCode_sh'] = re.findall(
+                            pattern, str(soup.find_all('ul')[7]))
+                        self.gameData['stockCode_sz'] = re.findall(
+                            pattern, str(soup.find_all('ul')[8]))
+                        with open('cache/game.cache', 'w') as cache_file:
+                            cache_file.write(json.dumps(self.gameData))
+                        break
+                    except Exception as e:
+                        pass
+            else:
+                for each in self.mission[1]:
+                    self.api_get_sinajs(get_current_time(), newList)
 
     def analyze(self):
         send_func = None
