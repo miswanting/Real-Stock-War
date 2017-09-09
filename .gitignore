@@ -1,7 +1,6 @@
 .csv
 *.log
 .idea
-*.html
 __pycache__
 save
 cache
@@ -9,3 +8,4 @@ cache
 _*
 *.spec
 .vscode
+res
