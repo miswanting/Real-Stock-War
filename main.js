@@ -107,8 +107,8 @@ client.on('error', function() {
 function createWindow() {
   // Create the browser window.
   win = new BrowserWindow({
-    width: 800,
-    height: 600
+    width: 1600,
+    height: 900
   })
   win.setMenu(menu)
   // and load the index.html of the app.
