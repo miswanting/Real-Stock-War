@@ -111,13 +111,13 @@ function createWindow() {
     height: 900
   })
   win.setMenu(menu)
+  win.maximize()
   // and load the index.html of the app.
   win.loadURL(url.format({
     pathname: path.join(__dirname, 'index.html'),
     protocol: 'file:',
     slashes: true
   }))
-
   // Open the DevTools.
   win.webContents.openDevTools()
 
