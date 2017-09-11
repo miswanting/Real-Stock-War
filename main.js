@@ -99,6 +99,9 @@ client.on('data', function(data) {
 client.on('close', function() {
   console.log('Connection closed');
 });
+client.on('error', function() {
+  console.log('Connection error');
+});
 
 
 function createWindow() {
