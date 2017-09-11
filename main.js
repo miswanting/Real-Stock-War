@@ -77,7 +77,6 @@ const template = [{
   }
 ]
 const menu = Menu.buildFromTemplate(template)
-// Menu.setApplicationMenu(menu)
 Menu.setApplicationMenu(menu)
 
 var net = require('net');
@@ -119,7 +118,7 @@ function createWindow() {
     slashes: true
   }))
   // Open the DevTools.
-  // win.webContents.openDevTools()
+  win.webContents.openDevTools()
   // Emitted when the window is closed.
   win.on('closed', () => {
     // Dereference the window object, usually you would store windows
@@ -148,6 +147,10 @@ app.on('activate', () => {
     createWindow()
   }
 })
+const ipc = require('electron').ipcMain
 
+ipc.on('synchronous-message', function(event, arg) {
+  event.returnValue = 'pong'
+})
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
