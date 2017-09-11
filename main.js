@@ -1,5 +1,6 @@
 const {
   app,
+  Menu,
   BrowserWindow
 } = require('electron')
 const path = require('path')
@@ -10,6 +11,74 @@ const url = require('url')
 let win
 
 // var ppp = require('child_process').spawn('DebugNext.bat')
+
+const template = [{
+    label: '游戏',
+    submenu: [{
+        label: '开始新游戏'
+      },
+      {
+        type: 'separator'
+      },
+      {
+        label: '注销账号'
+      },
+      {
+        type: 'separator'
+      },
+      {
+        label: '退出游戏'
+      }
+    ]
+  },
+  {
+    label: '动作',
+    submenu: [{
+      label: '刷新数据'
+    }]
+  },
+  {
+    label: '视图',
+  },
+  {
+    label: '工具',
+    submenu: [{
+        type: 'separator'
+      },
+      {
+        label: '游戏设置'
+      }
+    ]
+  },
+  {
+    label: '帮助',
+    submenu: [{
+        label: '文档'
+      },
+      {
+        type: 'separator'
+      },
+      {
+        label: '教程'
+      },
+      {
+        type: 'separator'
+      },
+      {
+        label: '更新'
+      },
+      {
+        type: 'separator'
+      },
+      {
+        label: '关于'
+      }
+    ]
+  }
+]
+const menu = Menu.buildFromTemplate(template)
+// Menu.setApplicationMenu(menu)
+Menu.setApplicationMenu(menu)
 
 var net = require('net');
 var HOST = '127.0.0.1';
@@ -38,7 +107,7 @@ function createWindow() {
     width: 800,
     height: 600
   })
-
+  win.setMenu(menu)
   // and load the index.html of the app.
   win.loadURL(url.format({
     pathname: path.join(__dirname, 'index.html'),
