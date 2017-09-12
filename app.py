@@ -101,7 +101,7 @@ class App:
                     send_func = conn.send
                     recv_func = conn.recv
                     while True:
-                        data = conn.recv(1024)
+                        data = conn.recv(4096)
                         if not data:
                             break
                         print('收到信息：{}'.format(data))
