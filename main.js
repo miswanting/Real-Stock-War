@@ -92,7 +92,9 @@ client.connect(PORT, HOST, function() {
 client.on('data', function(data) {
   console.log('DATA: ' + data);
   // Close the client socket completely
-  client.destroy();
+  // client.destroy();
+  win.webContents.send("asynchronous-reply", data.toString())
+  // win.webContents.send("asynchronous-reply", "data")
 });
 // Add a 'close' event handler for the client socket
 client.on('close', function() {
@@ -149,8 +151,10 @@ app.on('activate', () => {
 })
 const ipc = require('electron').ipcMain
 
-ipc.on('synchronous-message', function(event, arg) {
-  event.returnValue = 'pong'
+ipc.on('asynchronous-message', function(event, arg) {
+  // event.sender.send('asynchronous-reply', 'pong')
+  console.log(arg)
+  client.write(arg);
 })
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
