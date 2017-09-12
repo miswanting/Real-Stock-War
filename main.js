@@ -91,6 +91,7 @@ client.connect(PORT, HOST, function() {
 });
 client.on('data', function(data) {
   console.log('DATA: ' + data);
+  console.log(typeof data)
   // Close the client socket completely
   // client.destroy();
   win.webContents.send("asynchronous-reply", data.toString())
