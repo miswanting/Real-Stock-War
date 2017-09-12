@@ -83,8 +83,8 @@ class App:
         # 载入AI
 
         # 恢复缓存
-        if os.path.isfile('cache/game.cache'):  # 判断——缓存文件存在：加载
-            with open('cache/game.cache', 'r')as cache_file:
+        if os.path.isfile('cache/data.json'):  # 判断——缓存文件存在：加载
+            with open('cache/data.json', 'r')as cache_file:
                 self.gameData = json.loads(cache_file.read())
 
     def start_server(self):
@@ -143,7 +143,7 @@ class App:
                     self.gameData['stockCode_sz'] = re.findall(
                         pattern, str(soup.find_all('ul')[8]))
                     self.isRunning['fetchStockCode'] = False
-                    with open('cache/game.cache', 'w') as cache_file:
+                    with open('cache/data.json', 'w') as cache_file:
                         cache_file.write(json.dumps(self.gameData))
                 except Exception as e:
                     logging.debug('fetchStockCode崩溃')
@@ -165,7 +165,7 @@ class App:
                     self.gameData['new_data_sh'] = self.api_get_sinajs(
                         get_current_time(), newList)
                     self.isRunning['fetchSHStock'] = False
-                    with open('cache/game.cache', 'w') as cache_file:
+                    with open('cache/data.json', 'w') as cache_file:
                         cache_file.write(json.dumps(self.gameData))
             newList = []
             for each in self.gameData['new_data_sh'].keys():
@@ -189,7 +189,7 @@ class App:
                     self.gameData['new_data_sz'] = self.api_get_sinajs(
                         get_current_time(), newList)
                     self.isRunning['fetchSZStock'] = False
-                    with open('cache/game.cache', 'w') as cache_file:
+                    with open('cache/data.json', 'w') as cache_file:
                         cache_file.write(json.dumps(self.gameData))
             newList = []
             for each in self.gameData['new_data_sz'].keys():
