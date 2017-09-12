@@ -181,7 +181,7 @@ class App:
             newList = []
             for each in self.gameData['new_data_sh'].keys():
                 newList.append(self.gameData['new_data_sh'][each][0])
-            self.ui.clean_set_list_widget_sh(newList)
+            # self.ui.clean_set_list_widget_sh(newList)
 
         def fetchSZStock():
             """用已保存的股票代码查询深证成份股票当前信息"""
@@ -205,7 +205,7 @@ class App:
             newList = []
             for each in self.gameData['new_data_sz'].keys():
                 newList.append(self.gameData['new_data_sz'][each][0])
-            self.ui.clean_set_list_widget_sz(newList)
+            # self.ui.clean_set_list_widget_sz(newList)
 
         dapan = threading.Thread(target=fetchDaPanData)
         stockCode = threading.Thread(target=fetchStockCode)
