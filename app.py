@@ -30,6 +30,7 @@ key_stock_code = '">(.*?)\((.*?)\)<'
 HOST = '127.0.0.1'
 PORT = 6969
 
+
 def get_current_time():
     return str(int(time.time()))
 
