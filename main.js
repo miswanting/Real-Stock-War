@@ -149,6 +149,17 @@ app.on('activate', () => {
     createWindow()
   }
 })
+// const ipc = require('electron').ipcMain
+// var currentIndex = 0
+// ipc.on('synchronous-message', function(event, arg) {
+// console.log(arg)
+// if (arg == 'get item') {
+//   // event.returnValue = '1 2 3 4 5 6 7'
+//   client.write('get item');
+// } else if (arg == 'anymore') {
+//   event.returnValue = 'nomore'
+// }
+// })
 const ipc = require('electron').ipcMain
 
 ipc.on('asynchronous-message', function(event, arg) {
