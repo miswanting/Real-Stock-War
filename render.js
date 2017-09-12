@@ -104,5 +104,10 @@ function addItem(newItem) {
 }
 
 function clearItem() {
+  var test = document.getElementById("test")
+  while (test.hasChildNodes()) //当div下还存在子节点时 循环继续
+  {
+    test.removeChild(test.firstChild);
+  }
 
 }
