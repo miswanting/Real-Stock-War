@@ -1,12 +1,41 @@
 const ipc = require('electron').ipcRenderer
+//
+// const syncMsgBtn = document.getElementById('sync-msg')
+//
+// clearItem()
+//
+// syncMsgBtn.addEventListener('click', function() {
+//
+//   // const message = `Synchronous message reply: ${reply}`
+//   // document.getElementById('sync-reply').innerHTML = message
+//   var reply = ipc.sendSync('synchronous-message', 'get item')
+//   while (true) {
+//     console.log(reply)
+//     if (reply == "nomore") {
+//       break
+//     }
+//     var newItem = reply.split(" ")
+//     addItem(newItem)
+//     var reply = ipc.sendSync('synchronous-message', 'anymore')
+//   }
+// })
+clearItem()
+const asyncMsgBtn = document.getElementById('async-msg')
 
-const syncMsgBtn = document.getElementById('sync-msg')
+asyncMsgBtn.addEventListener('click', function() {
+  ipc.send('asynchronous-message', 'get item')
+})
 
-syncMsgBtn.addEventListener('click', function() {
-  const reply = ipc.sendSync('synchronous-message', 'ping')
-  // const message = `Synchronous message reply: ${reply}`
-  // document.getElementById('sync-reply').innerHTML = message
-
+ipc.on('asynchronous-reply', function(event, arg) {
+  if (arg != "nomore") {
+    var newItem = arg.slice(2, arg.length - 2).split("\", \"")
+    // var newNewItem = unescape(encodeURIComponent(newItem[0]))
+    var newNewItem = unescape(decodeURIComponent(newItem[0]))
+    console.log(newNewItem)
+    console.log("")
+    addItem(newItem)
+    ipc.send('asynchronous-message', 'anymore')
+  }
 })
 
 function addNav(newNav) {
