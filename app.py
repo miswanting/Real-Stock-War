@@ -100,12 +100,23 @@ class App:
                     print('建立连接：{}'.format(addr))
                     send_func = conn.send
                     recv_func = conn.recv
+                    index = 0
                     while True:
                         data = conn.recv(4096)
                         if not data:
                             break
                         print('收到信息：{}'.format(data))
-                        conn.sendall(json.dumps(self.gameData).encode())
+                        if data == b'get item':
+                            conn.sendall(json.dumps(self.gameData['new_data_sh'][list(
+                                self.gameData['new_data_sh'].keys())[index]]).encode())
+                            print(json.dumps(self.gameData['new_data_sh'][list(
+                                self.gameData['new_data_sh'].keys())[index]]).encode())
+
+                        elif data == b'anymore':
+                            index += 1
+                            if self.gameData['new_data_sh'][list(self.gameData['new_data_sh'].keys())[index]]:
+                                conn.sendall(json.dumps(self.gameData['new_data_sh'][list(
+                                    self.gameData['new_data_sh'].keys())[index]]).encode())
                     conn.close()
                     print('连接断开')
                     print()
