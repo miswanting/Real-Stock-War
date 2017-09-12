@@ -56,26 +56,49 @@ function change2ndTitle(newTitle) {
 
 function addItem(newItem) {
   var new_tr = document.createElement("tr")
+  // 代码
   var new_td = document.createElement("td")
-  var new_textnode = document.createTextNode("1,000")
+  var new_textnode = document.createTextNode(newItem[0])
   new_td.appendChild(new_textnode)
   new_tr.appendChild(new_td)
-  var num = document.createElement("td")
-  var node = document.createTextNode("1,000")
-  num.appendChild(node)
-  new_tr.appendChild(num)
-  var num = document.createElement("td")
-  var node = document.createTextNode("1,000")
-  num.appendChild(node)
-  new_tr.appendChild(num)
-  var num = document.createElement("td")
-  var node = document.createTextNode("1,000")
-  num.appendChild(node)
-  new_tr.appendChild(num)
-  var num = document.createElement("td")
-  var node = document.createTextNode("1,000")
-  num.appendChild(node)
-  new_tr.appendChild(num)
+  // 名称
+  var new_td = document.createElement("td")
+  var new_textnode = document.createTextNode(newItem[1])
+  new_td.appendChild(new_textnode)
+  new_tr.appendChild(new_td)
+  // 当前
+  var new_td = document.createElement("td")
+  var new_textnode = document.createTextNode(newItem[2])
+  new_td.appendChild(new_textnode)
+  new_tr.appendChild(new_td)
+  // 今开
+  var new_td = document.createElement("td")
+  var new_textnode = document.createTextNode(newItem[3])
+  new_td.appendChild(new_textnode)
+  new_tr.appendChild(new_td)
+  // 昨收
+  var new_td = document.createElement("td")
+  var new_textnode = document.createTextNode(newItem[4])
+  new_td.appendChild(new_textnode)
+  new_tr.appendChild(new_td)
+  // 最高
+  var new_td = document.createElement("td")
+  var new_textnode = document.createTextNode(newItem[5])
+  new_td.appendChild(new_textnode)
+  new_tr.appendChild(new_td)
+  // 最低
+  var new_td = document.createElement("td")
+  var new_textnode = document.createTextNode(newItem[6])
+  new_td.appendChild(new_textnode)
+  new_tr.appendChild(new_td)
+  // 操作
+  var new_td = document.createElement("button")
+  new_td.type = "button"
+  new_td.className = "btn btn-primary"
+  var new_textnode = document.createTextNode("买入")
+  new_td.appendChild(new_textnode)
+  new_tr.appendChild(new_td)
+
   var test = document.getElementById("test")
   test.appendChild(new_tr)
 }
