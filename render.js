@@ -1,24 +1,4 @@
 const ipc = require('electron').ipcRenderer
-//
-// const syncMsgBtn = document.getElementById('sync-msg')
-//
-// clearItem()
-//
-// syncMsgBtn.addEventListener('click', function() {
-//
-//   // const message = `Synchronous message reply: ${reply}`
-//   // document.getElementById('sync-reply').innerHTML = message
-//   var reply = ipc.sendSync('synchronous-message', 'get item')
-//   while (true) {
-//     console.log(reply)
-//     if (reply == "nomore") {
-//       break
-//     }
-//     var newItem = reply.split(" ")
-//     addItem(newItem)
-//     var reply = ipc.sendSync('synchronous-message', 'anymore')
-//   }
-// })
 clearItem()
 const asyncMsgBtn = document.getElementById('async-msg')
 
@@ -29,10 +9,8 @@ asyncMsgBtn.addEventListener('click', function() {
 ipc.on('asynchronous-reply', function(event, arg) {
   if (arg != "nomore") {
     var newItem = arg.slice(2, arg.length - 2).split("\", \"")
-    // var newNewItem = unescape(encodeURIComponent(newItem[0]))
     var newNewItem = unescape(decodeURIComponent(newItem[0]))
     console.log(newNewItem)
-    console.log("")
     addItem(newItem)
     ipc.send('asynchronous-message', 'anymore')
   }
@@ -98,6 +76,10 @@ function addItem(newItem) {
   var new_textnode = document.createTextNode("买入")
   new_td.appendChild(new_textnode)
   new_tr.appendChild(new_td)
+  new_td.setAttribute("id", newItem[0])
+  new_td.addEventListener("click", function() {
+    alert(this.id);
+  })
 
   var test = document.getElementById("test")
   test.appendChild(new_tr)
