@@ -106,18 +106,24 @@ class App:
                         data = conn.recv(4096)
                         if not data:
                             break
-                        print('收到信息：{}'.format(data))
+                        # print('收到信息：{}'.format(data))
                         if data == b'get item':
-                            conn.sendall(json.dumps(self.gameData['new_data_sh'][list(
-                                self.gameData['new_data_sh'].keys())[index]]).encode())
-                            print(json.dumps(self.gameData['new_data_sh'][list(
-                                self.gameData['new_data_sh'].keys())[index]]).encode())
+                            code = list(self.gameData['new_data_sh'].keys())[
+                                index]
+                            name = self.gameData['new_data_sh'][code][0]
+                            data = self.gameData['new_data_sh'][code]
+                            newList = [code] + data
+                            conn.sendall(json.dumps(newList).encode())
 
                         elif data == b'anymore':
                             index += 1
-                            if self.gameData['new_data_sh'][list(self.gameData['new_data_sh'].keys())[index]]:
-                                conn.sendall(json.dumps(self.gameData['new_data_sh'][list(
-                                    self.gameData['new_data_sh'].keys())[index]]).encode())
+                            if index < len(self.gameData['new_data_sh']) - 1:
+                                code = list(self.gameData['new_data_sh'].keys())[
+                                    index]
+                                name = self.gameData['new_data_sh'][code][0]
+                                data = self.gameData['new_data_sh'][code]
+                                newList = [code] + data
+                                conn.sendall(json.dumps(newList).encode())
                     conn.close()
                     print('连接断开')
                     print()
