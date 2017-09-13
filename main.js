@@ -91,6 +91,8 @@ client.connect(PORT, HOST, function() {
 });
 client.on('data', function(data) {
   console.log('DATA: ' + data);
+  console.log(listAllProperties(data))
+
   console.log(typeof data)
   // Close the client socket completely
   // client.destroy();
@@ -105,6 +107,16 @@ client.on('error', function() {
   console.log('Connection error');
 });
 
+function listAllProperties(o) {
+  var objectToInspect;
+  var result = [];
+
+  for (objectToInspect = o; objectToInspect !== null; objectToInspect = Object.getPrototypeOf(objectToInspect)) {
+    result = result.concat(Object.getOwnPropertyNames(objectToInspect));
+  }
+
+  return result;
+}
 
 function createWindow() {
   // Create the browser window.
